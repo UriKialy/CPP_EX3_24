@@ -24,8 +24,11 @@ namespace ariel
         string get_type() const;
         int get_id() const;
         vector<Tiles> get_neighbors();
+        string get_yeild() const;
         int get_value_role() const;
         Tiles get_tile(string id) const; // if we want to get a tile by its id
         Tiles &operator=(const Tiles &other);
+        bool operator==(const Tiles &other);
+        bool operator!=(const Tiles &other);
     };
 }
