@@ -12,5 +12,6 @@ namespace ariel
         string choseRandomType();
         int roll_dice();
         int choseRandomRole();
+        
     };
 }
