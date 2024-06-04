@@ -176,7 +176,7 @@ namespace ariel
         return rand() % 11 + 2;
     }
     // Tiles board::get_tile(int id)
-    //     {
+    //     {    
     //         return
     //     }
 }
