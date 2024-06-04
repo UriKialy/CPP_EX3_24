@@ -13,7 +13,7 @@ namespace ariel
     public:
         static int knightsCount;
         knights(string type, vector<card> price);
-        virtual void buy_card(player &p)=0;
-        void use_card(player &p);
+        virtual int buy_card(player &p)=0;
+        int use_card(player &p);
     };
 }

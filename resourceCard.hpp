@@ -1,4 +1,3 @@
-#include "card.hpp"
 #include "player.hpp"
 #include <iostream>
 #include <string>
@@ -6,14 +5,13 @@
 using namespace std;
 namespace ariel
 {
-    class resourceCard : public card
+    class resourceCard 
     {
         string type;
-        vector<card> price;
-
     public:
-        resourceCard(string type);
-        void buy_card(player &p);
-        void use_card(player &p);
+        resourceCard(string type):type(type){};
+        string get_type(){
+            return type;
+        }       
     };
 } // namespace ariel

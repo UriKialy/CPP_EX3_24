@@ -16,12 +16,36 @@ namespace ariel
             cout << "you can't have more than 4 knights cards" << endl;
         }
     }
-    void knights::use_card(player &p)
+    int knights::use_card(player &p)
     {
-        cout << "knights card used" << endl;
+        int kinghts = 0;
+        for (int i = 0; i < 2; i++)
+        {
+            if (p.get_developmentCard().at(i).get_type() == "knight")
+            {
+                kinghts++;
+            }
+        }
+        if(knights>2){
+            p.add_points(2);
+            p.get_developmentCard().erase();
+            return 1;
+        }
+        return 0;
+        }
     }
-    void knights::buy_card(player &p)
+    int knights::buy_card(player &p)
     {
-        cout << "knights card bought" << endl;
+        if (p.get_resourceCard().contains(*this.price))
+        {
+            p.add_card(*this);
+            p.get_resourceCard().erase(*this.price);
+            return 1;
+        }
+        else
+        {
+            cout << "you don't have enough resources to buy this card" << endl;
+            return 0;
+        }
     }
 }

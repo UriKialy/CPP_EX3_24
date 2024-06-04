@@ -13,8 +13,8 @@ namespace ariel
         vector<resourceCard> price;
     public:
         promotion(string type, vector<card> price);
-        virtual void buy_card(player &p)=0;
-        void use_card(player &p);
+        virtual int buy_card(player &p)=0;
+        int use_card(player &p);
     };
 }
 // this the promotion class which is a base card for monopoly, year_of_abundance, road_building

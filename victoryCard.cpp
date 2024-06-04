@@ -1,4 +1,4 @@
-#include "vicoctoryCard.hpp"
+#include "victoryCard.hpp"
 using namespace std;
 namespace ariel
 {
@@ -16,12 +16,22 @@ namespace ariel
         }
         
     }
-    void victoryCard::use_card(player &p)
+    int victoryCard::use_card(player &p)
     {
-        cout << "victory card used" << endl;
+        p.add_point();
     }
-    void victoryCard::buy_card(player &p)
+    int victoryCard::buy_card(player &p)
     {
-        cout << "victory card bought" << endl;
+        if(p.get_resourceCard().contains(*this.price))
+        {
+            p.add_card(*this);
+            p.get_resourceCard().erase(*this.price);
+            return 1
+        }
+        else
+        {
+            cout<<"you don't have enough resources to buy this card"<<endl;
+            return 0;
+        }
     }
 }
