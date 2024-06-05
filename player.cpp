@@ -33,14 +33,28 @@ namespace ariel
     {
         return resource_cards;
     }
-    int player::add_card(developmentCard c)
+    int player::add_card(developeCard c)
     {
         cards.push_back(c);
         return 0;
     }
-    vector<developmentCard> player::get_developmentCard()
+    vector<developeCard> player::get_developmentCard()
     {
         return cards;
+    }
+    int player::buy_card(developeCard &p)
+    {
+        if(resource_cards.contains(*p.get_price()))
+        {
+            add_card(*p);
+            resource_cards.erase(*p.get_price());
+            return 1;
+        }
+        else
+        {
+            cout<<"you don't have enough resources to buy this card"<<endl;
+            return 0;
+        }
     }
 } // namespace ariel
 

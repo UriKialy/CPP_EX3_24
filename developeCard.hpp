@@ -6,14 +6,14 @@
 using namespace std;
 namespace ariel
 {
-    class developCard 
+    class developeCard 
     {
         string type;
         vector<resourceCard> price;
     public:
-        developCard(string type, vector<card> price);
-        virtual int buy_card(player &p)=0;
-        int use_card(player &p);
-    };
+        developeCard(string type, vector<resourceCard> price);
+        string get_type();
+        vector<resourceCard> get_price();
+            };
 }
 // this the developCard class which is a base card for promotion, victory, knights

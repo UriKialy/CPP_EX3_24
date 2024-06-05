@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "resourceCard.hpp"
-#include "developmentCard.hpp"
+#include "developeCard.hpp"
 using namespace std;
 namespace ariel{
 
@@ -12,7 +12,7 @@ class player{
     int win_counter;
     int points;
     vector<resourceCard> resource_cards;
-    vector<developmentCard> cards;
+    vector<developeCard> cards;
     public:
     player(string name, int id);
     //~player()=default;
@@ -23,8 +23,10 @@ class player{
     int get_win_counter() const;
     int add_resource_card(resourceCard rc);
     vector<resourceCard> get_resource_cards() ;
-    int add_card(developmentCard c);
-    vector<developmentCard> get_developmentCard();
+    int add_card(developeCard c);
+    vector<developeCard> get_developmentCard();
+    int buy_card(developeCard &p);
+
     
 };
 

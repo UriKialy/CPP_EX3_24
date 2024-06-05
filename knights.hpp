@@ -6,14 +6,13 @@
 using namespace std;
 namespace ariel
 {
-    class knights : public developCard
+    class knights : public developeCard
     {
         string type;
         vector<resourceCard> price;
     public:
         static int knightsCount;
-        knights(string type, vector<card> price);
-        virtual int buy_card(player &p)=0;
+        knights(string type, vector<resourceCard> price);
         int use_card(player &p);
     };
 }

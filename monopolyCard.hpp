@@ -12,8 +12,7 @@ namespace ariel
         string type;
         vector<resourceCard> price;
     public:
-        promotion(string type, vector<card> price);
-        virtual int buy_card(player &p)=0;
+        monopolyCard(string type, vector<resourceCard> price); // Added closing parenthesis here
         int use_card(player &p);
     };
 }
