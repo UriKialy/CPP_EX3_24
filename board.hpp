@@ -12,6 +12,7 @@ namespace ariel
         string choseRandomType();
         int roll_dice();
         int choseRandomRole();
+        void print_board();
         
     };
 }

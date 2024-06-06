@@ -13,7 +13,6 @@ namespace ariel{
         public:
         static int victoryCardCount=0;
         card(string type, vector<card> price);
-        int buy_card(player &p);
          int use_card(player &p);
     };
 }

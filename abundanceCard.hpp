@@ -1,4 +1,5 @@
 #include "promotion.hpp"
+#include "player.hpp"
 using namespace std;
 namespace ariel
 {

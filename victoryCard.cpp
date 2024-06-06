@@ -20,18 +20,5 @@ namespace ariel
     {
         p.add_point();
     }
-    int victoryCard::buy_card(player &p)
-    {
-        if(p.get_resourceCard().contains(*this.price))
-        {
-            p.add_card(*this);
-            p.get_resourceCard().erase(*this.price);
-            return 1
-        }
-        else
-        {
-            cout<<"you don't have enough resources to buy this card"<<endl;
-            return 0;
-        }
-    }
+    
 }

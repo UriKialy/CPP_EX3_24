@@ -3,6 +3,8 @@
 #include <vector>
 #include "resourceCard.hpp"
 #include "developeCard.hpp"
+#include "road_building.hpp"
+
 using namespace std;
 namespace ariel{
 
@@ -16,16 +18,20 @@ class player{
     public:
     player(string name, int id);
     //~player()=default;
+    string get_name() const;
     int get_id() const;
     void add_win();
     int get_points();
     void add_points(int points);
     int get_win_counter() const;
-    int add_resource_card(resourceCard rc);
+    void add_resource_card(resourceCard rc);
     vector<resourceCard> get_resource_cards() ;
-    int add_card(developeCard c);
+    void add_card(developeCard c);
     vector<developeCard> get_developmentCard();
-    int buy_card(developeCard &p);
+    int buy_card(developeCard &card);
+    int trade_card(developeCard &card, player &p);
+    bool find_card(string type);
+   
 
     
 };

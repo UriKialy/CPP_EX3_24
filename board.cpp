@@ -3,22 +3,25 @@
 using namespace std;
 namespace ariel
 {
-
-    board::board()//constructor for the board
+    board::board() // constructor for the board
     {
+        vector<int> number_roll = {5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 11, 3, 4, 5, 6, 0};
+        vector<string> typeVector = {"Wheat", "Wood", "Brick", "Sheep", "Wood", "Brick", "Wheat", "Clay", "Sheep", "Clay",
+                               "Wood", "Wheat", "Wood", "Wheat", "Sheep", "Wood", "Clay", "Sheep", "Desert"};
+        vector<int> idVector = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
         vector<Tiles> tiles(19);
         for (int i = 0; i < 19; i++)
         {
             if (i != 9)
             {
-                tiles.at(i) = Tiles(choseRandomType(), i, choseRandomRole());
+                tiles.at(i) = Tiles(typeVector.at(i),idVector.at(i), number_roll.at(i));
             }
         }
-        tiles.at(9) = Tiles(" desert", 0, rand() % 11 + 2);
-        //set all the neighbors
+        tiles.at(9) = Tiles(" desert",9,7);
+        // set all the neighbors
         tiles.at(0).set_neighbor(tiles.at(1), 0);
-        tiles[0].set_neighbor(tiles[3],3);
-         tiles[0].set_neighbor(tiles[4],4);
+        tiles[0].set_neighbor(tiles[3], 3);
+        tiles[0].set_neighbor(tiles[4], 4);
         tiles[0].set_neighbor(tiles[1], 5);
         tiles[1].set_neighbor(tiles[0], 2);
         tiles[1].set_neighbor(tiles[4], 3);
@@ -55,128 +58,81 @@ namespace ariel
         tiles[8].set_neighbor(tiles[12], 3);
         tiles[8].set_neighbor(tiles[13], 4);
         tiles[8].set_neighbor(tiles[9], 5);
-        //desetrt 9
-        tiles[9].set_neighbor(tiles[5],0);
-        tiles[9].set_neighbor(tiles[4],1);
-        tiles[9].set_neighbor(tiles[8],2);
-        tiles[9].set_neighbor(tiles[13],3);
-        tiles[9].set_neighbor(tiles[14],4);
-        tiles[9].set_neighbor(tiles[10],5);
-        tiles[10].set_neighbor(tiles[6],0);
-        tiles[10].set_neighbor(tiles[5],1);
-        tiles[10].set_neighbor(tiles[9],2);
-        tiles[10].set_neighbor(tiles[14],3);
-        tiles[10].set_neighbor(tiles[15],4);
-        tiles[10].set_neighbor(tiles[11],5);
-        tiles[11].set_neighbor(tiles[6],1);
-        tiles[11].set_neighbor(tiles[10],2);
-        tiles[11].set_neighbor(tiles[15],3);
-        tiles[12].set_neighbor(tiles[8],0);
-        tiles[12].set_neighbor(tiles[7],1);
-        tiles[12].set_neighbor(tiles[16],4);
-        tiles[12].set_neighbor(tiles[13],5);
-        tiles[13].set_neighbor(tiles[9],0);
-        tiles[13].set_neighbor(tiles[8],1);
-        tiles[13].set_neighbor(tiles[12],2);
-        tiles[13].set_neighbor(tiles[16],3);
-        tiles[13].set_neighbor(tiles[17],4);
-        tiles[13].set_neighbor(tiles[14],5);
-        tiles[14].set_neighbor(tiles[10],0);
-        tiles[14].set_neighbor(tiles[9],1);
-        tiles[14].set_neighbor(tiles[13],2);
-        tiles[14].set_neighbor(tiles[17],3);
-        tiles[14].set_neighbor(tiles[18],4);
-        tiles[14].set_neighbor(tiles[15],5);
-        tiles[15].set_neighbor(tiles[11],0);
-        tiles[15].set_neighbor(tiles[10],1);
-        tiles[15].set_neighbor(tiles[14],2);
-        tiles[15].set_neighbor(tiles[18],3);
-        tiles[16].set_neighbor(tiles[13],0);
-        tiles[16].set_neighbor(tiles[12],1);
-        tiles[16].set_neighbor(tiles[17],5);
-        tiles[17].set_neighbor(tiles[14],0);
-        tiles[17].set_neighbor(tiles[13],1);
-        tiles[17].set_neighbor(tiles[16],2);
-        tiles[17].set_neighbor(tiles[18],5);
-        tiles[18].set_neighbor(tiles[15],0);
-        tiles[18].set_neighbor(tiles[14],1);
-        tiles[18].set_neighbor(tiles[17],2);
+        // desetrt 9
+        tiles[9].set_neighbor(tiles[5], 0);
+        tiles[9].set_neighbor(tiles[4], 1);
+        tiles[9].set_neighbor(tiles[8], 2);
+        tiles[9].set_neighbor(tiles[13], 3);
+        tiles[9].set_neighbor(tiles[14], 4);
+        tiles[9].set_neighbor(tiles[10], 5);
+        tiles[10].set_neighbor(tiles[6], 0);
+        tiles[10].set_neighbor(tiles[5], 1);
+        tiles[10].set_neighbor(tiles[9], 2);
+        tiles[10].set_neighbor(tiles[14], 3);
+        tiles[10].set_neighbor(tiles[15], 4);
+        tiles[10].set_neighbor(tiles[11], 5);
+        tiles[11].set_neighbor(tiles[6], 1);
+        tiles[11].set_neighbor(tiles[10], 2);
+        tiles[11].set_neighbor(tiles[15], 3);
+        tiles[12].set_neighbor(tiles[8], 0);
+        tiles[12].set_neighbor(tiles[7], 1);
+        tiles[12].set_neighbor(tiles[16], 4);
+        tiles[12].set_neighbor(tiles[13], 5);
+        tiles[13].set_neighbor(tiles[9], 0);
+        tiles[13].set_neighbor(tiles[8], 1);
+        tiles[13].set_neighbor(tiles[12], 2);
+        tiles[13].set_neighbor(tiles[16], 3);
+        tiles[13].set_neighbor(tiles[17], 4);
+        tiles[13].set_neighbor(tiles[14], 5);
+        tiles[14].set_neighbor(tiles[10], 0);
+        tiles[14].set_neighbor(tiles[9], 1);
+        tiles[14].set_neighbor(tiles[13], 2);
+        tiles[14].set_neighbor(tiles[17], 3);
+        tiles[14].set_neighbor(tiles[18], 4);
+        tiles[14].set_neighbor(tiles[15], 5);
+        tiles[15].set_neighbor(tiles[11], 0);
+        tiles[15].set_neighbor(tiles[10], 1);
+        tiles[15].set_neighbor(tiles[14], 2);
+        tiles[15].set_neighbor(tiles[18], 3);
+        tiles[16].set_neighbor(tiles[13], 0);
+        tiles[16].set_neighbor(tiles[12], 1);
+        tiles[16].set_neighbor(tiles[17], 5);
+        tiles[17].set_neighbor(tiles[14], 0);
+        tiles[17].set_neighbor(tiles[13], 1);
+        tiles[17].set_neighbor(tiles[16], 2);
+        tiles[17].set_neighbor(tiles[18], 5);
+        tiles[18].set_neighbor(tiles[15], 0);
+        tiles[18].set_neighbor(tiles[14], 1);
+        tiles[18].set_neighbor(tiles[17], 2);
+    }
 
-    }
-    int board::choseRandomRole()//randomly choose a role for the tile between 2-12 while all the numbers will be chosen
-    {
-        bool chosen = false;
-        int role;
-        do {
-            role = rand() % 11 + 2;//set number between 2-12
-            chosen = true;
-            for(int i=0;i<19;i++){
-            if(tiles.at(i).get_value_role()==role){//check if the number is already chosen
-                chosen=false;
-                break;
-            }
-            }
-        } while (!chosen);//if the number is already chosen choose another one
-        return role;
-    }
-    string board::choseRandomType()//randomly choose a type of tile
-    {
-        int forest = 0;
-        int hill = 0;
-        int mountain = 0;
-        int agrictulture_land = 0;
-        int pastureland = 0;
-        for (int i = 0; i < 19; i++)
-        {
-            if (tiles.at(i).get_type() == "forest")
-            {
-                forest++;
-            }
-            else if (tiles.at(i).get_type() == "hill")
-            {
-                hill++;
-            }
-            else if (tiles.at(i).get_type() == "mountain")
-            {
-                mountain++;
-            }
-            else if (tiles.at(i).get_type() == "agrictulture_land")
-            {
-                agrictulture_land++;
-            }
-            else
-            {
-                pastureland++;
-            }
-        }
-        int random = rand() % 5;
-        if (random == 0 && forest < 4)
-        {
-            return "forest";
-        }
-        else if (random == 1 && hill < 4)
-        {
-            return "hill";
-        }
-        else if (random == 2 && mountain < 4)
-        {
-            return "mountain";
-        }
-        else if (random == 3 && agrictulture_land < 4)
-        {
-            return "agrictulture_land";
-        }
-        else if (pastureland < 4)
-        {
-            return "pastureland";
-        }
-    }
     int board::roll_dice()
     {
         return rand() % 11 + 2;
     }
-    // Tiles board::get_tile(int id)
-    //     {    
-    //         return
-    //     }
+   
+    void board::print_board()
+    {
+        vector<string> board_representation(7, string(35, ' '));
+
+        auto format_tile = [](const string &type, int roll)
+        {
+            return type + " " + (roll == 0 ? "  " : (roll < 10 ? " " + to_string(roll) : to_string(roll)));
+        };
+
+        board_representation[0] = "       sea   sea   sea   sea   sea       ";
+        board_representation[1] = "    sea " + format_tile(tiles[0].get_type(), tiles[0].get_value_role()) + " " + format_tile(tiles[1].get_type(), tiles[1].get_value_role()) + " " + format_tile(tiles[2].get_type(), tiles[2].get_value_role()) + " sea ";
+        board_representation[2] = "  sea " + format_tile(tiles[3].get_type(), tiles[3].get_value_role()) + " " + format_tile(tiles[4].get_type(), tiles[4].get_value_role()) + " " + format_tile(tiles[5].get_type(), tiles[5].get_value_role()) + " " + format_tile(tiles[6].get_type(), tiles[6].get_value_role()) + " sea";
+        board_representation[3] = "sea " + format_tile(tiles[7].get_type(), tiles[7].get_value_role()) + " " + format_tile(tiles[8].get_type(), tiles[8].get_value_role()) + " " + format_tile(tiles[9].get_type(), tiles[9].get_value_role()) + " " + format_tile(tiles[18].get_type(), tiles[18].get_value_role()) + " " + format_tile(tiles[10].get_type(), tiles[10].get_value_role()) + " sea";
+        board_representation[4] = "  sea " + format_tile(tiles[11].get_type(), tiles[11].get_value_role()) + " " + format_tile(tiles[12].get_type(), tiles[12].get_value_role()) + " " + format_tile(tiles[13].get_type(), tiles[13].get_value_role()) + " " + format_tile(tiles[14].get_type(), tiles[14].get_value_role()) + " sea";
+        board_representation[5] = "    sea " + format_tile(tiles[15].get_type(), tiles[15].get_value_role()) + " " + format_tile(tiles[16].get_type(), tiles[16].get_value_role()) + " " + format_tile(tiles[17].get_type(), tiles[17].get_value_role()) + " sea ";
+        board_representation[6] = "       sea   sea   sea   sea   sea       ";
+
+        cout << "************ CATAN BOARD ************\n";
+        for (const auto &line : board_representation)
+        {
+            cout << line << endl;
+        }
+        cout << "*************************************\n";
+    }
 }
