@@ -2,7 +2,7 @@
 using namespace std;
 namespace ariel
 {
-    player::player(string name ,int id) : id(id), win_counter(0) ,points(0), name(name),resourceCard{},cards{},{}
+    player::player(string name ,int id) : id(id), win_counter(0) ,points(2), name(name),resourceCard{},cards{},{}
 
     int player::get_id() const
     {

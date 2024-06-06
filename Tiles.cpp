@@ -141,19 +141,20 @@ namespace ariel
             this->get_neighbors().at((index + 1) % 6).get_edges().at((index + 3 % 6)) = id;
             return 1;
         }
-        else{
-            cout<<"you can't build a road here"<<endl;
+        else
+        {
+            cout << "you can't build a road here" << endl;
             return 0;
-        
         }
     }
     int Tiles::set_vertex(int index, int type, int player_id)
-    {// recall: the vertex vector have the first element as the player id and the second is city/subberb
+    { // recall: the vertex vector have the first element as the player id and the second is city/subberb
         if (this->vertex.at(index).at(0) == 0 && (type == 1 || type == 0) && (player_id >= 1 && player_id < 4) && index >= 0 && index < 6)
         {
             int temp = index;
             int first = this->get_neighbors().at(index % 6).get_id();
             int second = this->get_neighbors().at((index + 1) % 6).get_id();
+            bool first_check = false, second_check = false, third_check = false;
             if (first >= 0 && second >= 0 && first < 19 && second < 19) // check if the neighbors are valid
             {
                 // remember to check that if i want to upgarde my suburb to a town here could be problems
@@ -161,16 +162,61 @@ namespace ariel
                 bool check_secondvertex = this->get_neighbors().at(index + 1 % 6).get_vertex().at(0).at((index + 4) % 6) == 0;
                 bool check_road_back = this->get_edges().at((index - 1) % 6) == player_id;
                 bool check_road_foward = this->get_edges().at((index - 1) % 6) == player_id;
-                bool is_near_by
-
-                if ((check_firstvertex && check_secondvertex && this->vertex.at(0).at(index) == 0) && (check_road_back || check_road_foward))
+                bool is_near_by_vertex = false;
+                switch (index)
+                {
+                case 0:
+                    first_check = this->get_neighbors().at(0).get_vertex().at(1).at(0) == 0;
+                    second_check = this->get_vertex().at(5).at(0) == 0;
+                    second_check = this->get_vertex().at(1).at(0) == 0;
+                    break;
+                case 1:
+                    first_check = this->get_neighbors().at(1).get_vertex().at(2).at(0) == 0;
+                    first_check = this->get_neighbors().at(1).get_vertex().at(4).at(0) == 0;
+                    second_check = this->get_vertex().at(2).at(0) == 0;
+                    break;
+                case 2:
+                    first_check = this->get_neighbors().at(2).get_vertex().at(3).at(0) == 0;
+                    second_check = this->get_vertex().at(1).at(0) == 0;
+                    second_check = this->get_vertex().at(3).at(0) == 0;
+                    break;
+                case 3:
+                    first_check = this->get_neighbors().at(4).get_vertex().at(2).at(0) == 0;
+                    second_check = this->get_vertex().at(2).at(0) == 0;
+                    second_check = this->get_vertex().at(4).at(0) == 0;
+                    break;
+                case 4:
+                    first_check = this->get_neighbors().at(4).get_vertex().at(5).at(0) == 0;
+                    first_check = this->get_neighbors().at(4).get_vertex().at(1).at(0) == 0;
+                    second_check = this->get_vertex().at(5).at(0) == 0;
+                    break;
+                case 5:
+                    first_check = this->get_neighbors().at(0).get_vertex().at(4).at(0) == 0;
+                    first_check = this->get_neighbors().at(0).get_vertex().at(2).at(0) == 0;
+                    second_check = this->get_vertex().at(4).at(0) == 0;
+                    break;
+                default:
+                    break;
+                }
+                bool toatl = first_check && second_check && third_check;
+                bool is_near_by_edge=false;
+                if(index!=5){
+                    is_near_by_edge=this->get_edges().at(index)==player_id && this->get_edges().at(index+1)==player_id;
+                }
+                else{
+                    is_near_by_edge=this->get_edges().at(5)==player_id && this->get_edges().at(0)==player_id;
+                }
+                if ((check_firstvertex && check_secondvertex && this->vertex.at(0).at(index) == 0) && (check_road_back || check_road_foward)&&
+                toatl && is_near_by_edge)
                 {
                     this->vertex.at(0).at(index) = player_id;
-                    {
                         this->vertex.at(0).at(index) = player_id;
                         this->vertex.at(1).at(index) = type;
-                        return 1;
-                    }
+                        this->get_neighbors().at(index).get_vertex().at((index + 2) % 6).at(0)= player_id;//set the vertex of the neighbor
+                        this->get_neighbors().at(index).get_vertex().at((index + 2) % 6).at(1)= type;
+                        this->get_neighbors().at(index+1).get_vertex().at((index + 4) % 6).at(0)= player_id;//set the vertex of the 2nd neighbor
+                        this->get_neighbors().at(index+1).get_vertex().at((index + 4) % 6).at(1)= type;                    
+                        return 1;                    
                 }
             }
             else
@@ -179,24 +225,30 @@ namespace ariel
             }
         }
     }
-    int Tiles::set_firstRound_vertex(int player_id,int index){
-        if(this->vertex.at(index)[0]==0){ // check if the vertex is empty and if so set the data
-            this->vertex.at(index).at(0)=player_id;
-            this->vertex.at(index).at(1)=1;
+    int Tiles::set_firstRound_vertex(int player_id, int index)
+    {
+        if (this->vertex.at(index)[0] == 0)
+        { // check if the vertex is empty and if so set the data
+            this->vertex.at(index).at(0) = player_id;
+            this->vertex.at(index).at(1) = 1;
             return 1;
         }
-        else{
-            cout<<"you can't build a suberb here cause this place is taken"<<endl;
+        else
+        {
+            cout << "you can't build a suberb here cause this place is taken" << endl;
             return 0;
         }
     }
-    int Tiles::set_firstRound_edge(int player_id,int index){
-        if(this->edges.at(index)==0){ // check if the edge is empty and if so set the data
-            this->edges.at(index)=player_id;
+    int Tiles::set_firstRound_edge(int player_id, int index)
+    {
+        if (this->edges.at(index) == 0)
+        { // check if the edge is empty and if so set the data
+            this->edges.at(index) = player_id;
             return 1;
         }
-        else{
-            cout<<"you can't build a road here cause this place is taken"<<endl;
+        else
+        {
+            cout << "you can't build a road here cause this place is taken" << endl;
             return 0;
         }
     }
