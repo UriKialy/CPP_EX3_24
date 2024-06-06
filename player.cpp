@@ -44,17 +44,24 @@ namespace ariel
     }
     int player:: buy_card(developeCard &card)
     {
-        if(resource_cards.find(*card.get_price()))
-        {
-            add_card(*card);
-            resource_cards.erase(*card.get_price());
-            return 1;
+        bool is_afoordable = true;
+        vector<resourceCard>::iterator index;
+        for(int i=0 ;i<card.get_price().size(); i++){
+            index = find(resource_cards.begin(), resource_cards.end(), card.get_price()[i]);
+            if(index != resource_cards.end())
+            ////still not finished
+            {
+                is_afoordable = false;
+                break;
+            }
+            resource_cards.erase(index);
         }
-        else
-        {
-            cout<<"you don't have enough resources to buy this card"<<endl;
+        add_card(card);
+        return 1;
+      
+        cout<<"you don't have enough resources to buy this card"<<endl;
             return 0;
-        }
+        
     }
     string player::get_name() const
     {

@@ -4,6 +4,7 @@
 #include "resourceCard.hpp"
 #include "developeCard.hpp"
 #include "road_building.hpp"
+#include <algorithm>
 
 using namespace std;
 namespace ariel{

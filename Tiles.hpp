@@ -6,6 +6,7 @@ namespace ariel
 {
     class Tiles
     {
+        //edges are the roads, vertex are the cities or suberbs
         string type;
         int id;
         int value_role;             // 2-12
@@ -30,5 +31,7 @@ namespace ariel
         Tiles &operator=(const Tiles &other);
         bool operator==(const Tiles &other);
         bool operator!=(const Tiles &other);
+        int set_firstRound_vertex(int player_id,int index);//the first round of the game each player set 2 suberbs
+        int set_firstRound_edge(int player_id,int index);//the first round of the game each player set 2 roads
     };
 }
