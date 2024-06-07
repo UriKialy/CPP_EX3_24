@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "player.hpp"
+#pragma once
 using namespace std;
 namespace ariel
 {

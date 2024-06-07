@@ -3,6 +3,7 @@
 #include <vector>
 #include "player.hpp"
 #include "promotion.hpp"
+#pragma once
 // #include "card.hpp"
 using namespace std;
 namespace ariel

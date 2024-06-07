@@ -4,6 +4,7 @@
 #include "resourceCard.hpp"
 #include "developeCard.hpp"
 #include "road_building.hpp"
+#pragma once
 #include <algorithm>
 
 using namespace std;
@@ -32,9 +33,6 @@ class player{
     int buy_card(developeCard &card);
     int trade_card(developeCard &card, player &p);
     bool find_card(string type);
-   
-
-    
 };
 
 }

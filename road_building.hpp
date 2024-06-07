@@ -1,4 +1,5 @@
 #include "promotion.hpp"
+#pragma once
 using namespace std;
 namespace ariel
 {

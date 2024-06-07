@@ -1,4 +1,5 @@
 #include "Tiles.hpp"
+#pragma once
 using namespace std;
 namespace ariel
 {

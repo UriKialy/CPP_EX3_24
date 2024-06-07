@@ -8,6 +8,7 @@ namespace ariel
     int monopolyCard::use_card(player &p)
     {
         cout << "promotion card used" << endl;
+        return 0;
     }
   
 }

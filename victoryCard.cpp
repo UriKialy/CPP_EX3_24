@@ -18,7 +18,8 @@ namespace ariel
     }
     int victoryCard::use_card(player &p)
     {
-        p.add_point();
+        p.add_points(1);
+        return 1;
     }
     
 }
