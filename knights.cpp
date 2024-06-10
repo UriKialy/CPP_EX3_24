@@ -30,7 +30,7 @@ namespace ariel
             p.add_points(2);
             for (int i = 0; i < 2; i++){
                 if (p.get_developmentCard().at(i).get_type() == "knight"){
-                    p.get_developmentCard().erase(p.get_developmentCard().at(i));
+                    p.get_developmentCard().erase(p.get_developmentCard().begin() + i);
                     knightsCount--;
                 }
             }
@@ -38,6 +38,9 @@ namespace ariel
         }
         return 0;
         }
+    int knights::get_knightsCount(){
+        return knightsCount;
+    }
     }
    
 

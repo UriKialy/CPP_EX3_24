@@ -10,7 +10,10 @@ namespace ariel
         string type;
     public:
         resourceCard(string type):type(type){};
-        string get_type(){
+        explicit resourceCard(){
+            type = "";
+        }
+         string get_type(){
             return type;
         }       
     };

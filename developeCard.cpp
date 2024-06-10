@@ -13,4 +13,8 @@ namespace ariel
     {
         return price;
     }
+    string developeCard::get_type()
+    {
+        return type;
+    }
 }

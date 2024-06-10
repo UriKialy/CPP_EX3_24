@@ -15,5 +15,6 @@ namespace ariel
         static int knightsCount;
         knights(string type, vector<resourceCard> price);
         int use_card(player &p);
+        int get_knightsCount();
     };
 }

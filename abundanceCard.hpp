@@ -11,5 +11,6 @@ namespace ariel
     public:
         abundanceCard(string type, vector<resourceCard> price);
         int use_card(player &p);
+        void display();
     };
 }

@@ -10,5 +10,14 @@ namespace ariel
         cout << "promotion card used" << endl;
         return 0;
     }
+    void monopolyCard::display()
+    {
+            cout << "Type: " << get_type() << endl;
+        cout << "Price: ";
+        for ( auto &promotion : get_price()) {
+            cout << promotion.get_type() << " ";
+        }
+        cout << endl;
+    }
   
 }

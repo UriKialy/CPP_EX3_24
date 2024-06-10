@@ -2,7 +2,7 @@
 using namespace std;
 namespace ariel
 {
-    victoryCard::victoryCard(string type, vector<resourceCard> price)
+    victoryCard::victoryCard(string type, vector<resourceCard>& price)
     {
         if(victoryCardCount<4)
         {
@@ -20,6 +20,16 @@ namespace ariel
     {
         p.add_points(1);
         return 1;
+    }
+    void victoryCard::display()
+    {
+        cout<<"Type: "<<get_type()<<endl;
+        cout<<"Price: ";
+        for(auto &promotion: get_price())
+        {
+            cout<<promotion.get_type()<<" ";
+        }
+        cout<<endl;
     }
     
 }

@@ -34,5 +34,8 @@ namespace ariel
         bool operator!=(const Tiles &other);
         int set_firstRound_vertex(int player_id,int index);//the first round of the game each player set 2 suberbs
         int set_firstRound_edge(int player_id,int index);//the first round of the game each player set 2 roads
+        int set_special_edges(int index,int id);//set the special edges of the tile
+        int check_before_apply(int index,int id);//  general checks before applying the edges
+        int apply_edges(int index,int id);//apply the edges
     };
 }

@@ -7,11 +7,14 @@ namespace ariel
 {
     class developeCard
     {
+    protected:
         string type;
         vector<resourceCard> price;
+
     public:
         developeCard(string type, vector<resourceCard> price);
-        virtual string get_type()=0;
+        explicit developeCard() = default;
+        virtual string get_type() = 0;
         vector<resourceCard> get_price();
     };
 }
