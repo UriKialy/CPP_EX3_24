@@ -1,41 +1,54 @@
-#include <iostream>
-#include <string>
-#include <vector>
 #pragma once
-using namespace std;
-namespace ariel
-{
-    class Tiles
-    {
-        //edges are the roads, vertex are the cities or suberbs
-        string type;
-        int id;
-        int value_role;             // 2-12
-        vector<int> edges;          // the index is the edge and the value is the player id
-        vector<vector<int>> vertex; // the first element is the player id and the second is city/subberb
-        vector<Tiles> neighbors{6};
 
-    public:
-        ~Tiles()=default;
-        Tiles(string type, int id, int value_role);
-        int set_edge(int edge, int player_id);
-        int set_vertex(int index, int type, int player_id); // 0 for city 1 for suburb
-        int set_neighbor(Tiles &neighbor, int index);
-        vector<int> get_edges();
-        vector<vector<int>> get_vertex();
-        string get_type() const;
-        int get_id() const;
-        vector<Tiles> get_neighbors();
-        string get_yeild() const;
-        int get_value_role() const;
-        Tiles get_tile(string id) const; // if we want to get a tile by its id
-        Tiles &operator=(const Tiles &other);
-        bool operator==(const Tiles &other);
-        bool operator!=(const Tiles &other);
-        int set_firstRound_vertex(int player_id,int index);//the first round of the game each player set 2 suberbs
-        int set_firstRound_edge(int player_id,int index);//the first round of the game each player set 2 roads
-        int set_special_edges(int index,int id);//set the special edges of the tile
-        int check_before_apply(int index,int id);//  general checks before applying the edges
-        int apply_edges(int index,int id);//apply the edges
-    };
-}
+#include <iostream>
+#include <vector>
+#include <string>
+#include "player.hpp"
+
+using namespace std;
+namespace ariel{
+class Tiles {
+public:
+    Tiles();
+    Tiles(int id, int value_roll, const string& type);
+    Tiles(const Tiles& other);
+    ~Tiles();
+
+    int getid() const;
+    int getvalue_roll() const;
+    string gettype() const;
+    vector<int> getedges() const;
+    vector<vector<int>> getvertex() const;
+    vector<Tiles> getneighbors() const;
+
+    void display_edges() const;
+    void display_vertex() const;
+    void display() const;
+
+    int setedges(int index, int id);
+    int set_vertex(int index, int type, int player_id);
+    void set_neighbor(Tiles& neighbor, int index);
+
+    bool operator==(const Tiles& other) const;
+    Tiles& operator=(const Tiles& other);
+    bool set_first_round_vertex(player& player, int& index);
+    bool set_first_round_edge(Player& p1, int &index);
+    void update_collision(int index, int id, int type);
+
+private:
+    int id;
+    int value_roll;
+    string type;
+    vector<int> edges;
+    vector<vector<int>> vertex;
+    vector<Tiles> neighbors;
+
+    int check_before_apply(int index, int id);
+    int set_special_edges(int index, int id);
+    int apply_edges(int index, int id);
+    bool check_roads_set_vertex(int index, int type, int player_id);
+    bool check_edges(int index, int type, int player_id);
+};
+}// namespace ariel
+
+

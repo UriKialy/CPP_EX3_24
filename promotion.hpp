@@ -1,9 +1,9 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
-#pragma once
 #include "developeCard.hpp" 
-// #include "card.hpp"
+
 using namespace std;
 namespace ariel
 {
@@ -12,9 +12,9 @@ namespace ariel
         string type;
         vector<resourceCard> price;
     public:
-        //promotion(string type, vector<resourceCard> price);
-        //virtual int use_card(player &p) = 0;
-        
+        promotion(string type, vector<resourceCard> price);
+        string get_type();
+        promotion();        
     };
 }
 // this the promotion class which is a base card for monopoly, year_of_abundance, road_building

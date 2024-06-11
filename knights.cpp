@@ -16,28 +16,6 @@ namespace ariel
             cout << "you can't have more than 4 knights cards" << endl;
         }
     }
-    int knights::use_card(player &p)
-    {
-        int Nkinghts = 0;
-        for (int i = 0; i < 2; i++)
-        {
-            if (p.get_developmentCard().at(i).get_type() == "knight")
-            {
-                Nkinghts++;
-            }
-        }
-        if(Nkinghts>2){
-            p.add_points(2);
-            for (int i = 0; i < 2; i++){
-                if (p.get_developmentCard().at(i).get_type() == "knight"){
-                    p.get_developmentCard().erase(p.get_developmentCard().begin() + i);
-                    knightsCount--;
-                }
-            }
-            return 1;
-        }
-        return 0;
-        }
     int knights::get_knightsCount(){
         return knightsCount;
     }

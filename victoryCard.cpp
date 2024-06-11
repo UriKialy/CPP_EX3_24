@@ -16,10 +16,9 @@ namespace ariel
         }
         
     }
-    int victoryCard::use_card(player &p)
+    int victoryCard::get_victoryCardCount()
     {
-        p.add_points(1);
-        return 1;
+        return victoryCardCount;
     }
     void victoryCard::display()
     {

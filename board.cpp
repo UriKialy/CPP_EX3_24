@@ -14,10 +14,10 @@ namespace ariel
         {
             if (i != 9)
             {
-                tiles.at(i) = Tiles(typeVector.at(i),idVector.at(i), number_roll.at(i));
+                tiles.at(i) = Tiles(idVector.at(i), number_roll.at(i),typeVector.at(i));
             }
         }
-        tiles.at(9) = Tiles(" desert",9,7);
+        tiles.at(9) = Tiles(9,7,"desert");
         // set all the neighbors
         tiles.at(0).set_neighbor(tiles.at(1), 0);
         tiles[0].set_neighbor(tiles[3], 3);
@@ -121,11 +121,11 @@ namespace ariel
         };
 
         board_representation[0] = "       sea   sea   sea   sea   sea       ";
-        board_representation[1] = "    sea " + format_tile(tiles[0].get_type(), tiles[0].get_value_role()) + " " + format_tile(tiles[1].get_type(), tiles[1].get_value_role()) + " " + format_tile(tiles[2].get_type(), tiles[2].get_value_role()) + " sea ";
-        board_representation[2] = "  sea " + format_tile(tiles[3].get_type(), tiles[3].get_value_role()) + " " + format_tile(tiles[4].get_type(), tiles[4].get_value_role()) + " " + format_tile(tiles[5].get_type(), tiles[5].get_value_role()) + " " + format_tile(tiles[6].get_type(), tiles[6].get_value_role()) + " sea";
-        board_representation[3] = "sea " + format_tile(tiles[7].get_type(), tiles[7].get_value_role()) + " " + format_tile(tiles[8].get_type(), tiles[8].get_value_role()) + " " + format_tile(tiles[9].get_type(), tiles[9].get_value_role()) + " " + format_tile(tiles[18].get_type(), tiles[18].get_value_role()) + " " + format_tile(tiles[10].get_type(), tiles[10].get_value_role()) + " sea";
-        board_representation[4] = "  sea " + format_tile(tiles[11].get_type(), tiles[11].get_value_role()) + " " + format_tile(tiles[12].get_type(), tiles[12].get_value_role()) + " " + format_tile(tiles[13].get_type(), tiles[13].get_value_role()) + " " + format_tile(tiles[14].get_type(), tiles[14].get_value_role()) + " sea";
-        board_representation[5] = "    sea " + format_tile(tiles[15].get_type(), tiles[15].get_value_role()) + " " + format_tile(tiles[16].get_type(), tiles[16].get_value_role()) + " " + format_tile(tiles[17].get_type(), tiles[17].get_value_role()) + " sea ";
+        board_representation[1] = "    sea " + format_tile(tiles[0].gettype(), tiles[0].getvalue_roll()) + " " + format_tile(tiles[1].gettype(), tiles[1].getvalue_roll()) + " " + format_tile(tiles[2].gettype(), tiles[2].getvalue_roll()) + " sea ";
+        board_representation[2] = "  sea " + format_tile(tiles[3].gettype(), tiles[3].getvalue_roll()) + " " + format_tile(tiles[4].gettype(), tiles[4].getvalue_roll()) + " " + format_tile(tiles[5].gettype(), tiles[5].getvalue_roll()) + " " + format_tile(tiles[6].gettype(), tiles[6].getvalue_roll()) + " sea";
+        board_representation[3] = "sea " + format_tile(tiles[7].gettype(), tiles[7].getvalue_roll()) + " " + format_tile(tiles[8].gettype(), tiles[8].getvalue_roll()) + " " + format_tile(tiles[9].gettype(), tiles[9].getvalue_roll()) + " " + format_tile(tiles[18].gettype(), tiles[18].getvalue_roll()) + " " + format_tile(tiles[10].gettype(), tiles[10].getvalue_roll()) + " sea";
+        board_representation[4] = "  sea " + format_tile(tiles[11].gettype(), tiles[11].getvalue_roll()) + " " + format_tile(tiles[12].gettype(), tiles[12].getvalue_roll()) + " " + format_tile(tiles[13].gettype(), tiles[13].getvalue_roll()) + " " + format_tile(tiles[14].gettype(), tiles[14].getvalue_roll()) + " sea";
+        board_representation[5] = "    sea " + format_tile(tiles[15].gettype(), tiles[15].getvalue_roll()) + " " + format_tile(tiles[16].gettype(), tiles[16].getvalue_roll()) + " " + format_tile(tiles[17].gettype(), tiles[17].getvalue_roll()) + " sea ";
         board_representation[6] = "       sea   sea   sea   sea   sea       ";
 
         cout << "************ CATAN BOARD ************\n";

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "player.hpp"
 #include "developeCard.hpp"
 #pragma once
 using namespace std;
@@ -13,8 +12,8 @@ namespace ariel{
         vector <resourceCard> price;
         public:
          static int victoryCardCount;
-        victoryCard(string type, vector<resourceCard>& price);
-         int use_card(player &p);
+        victoryCard(string type, vector<resourceCard>& price);        
          void display();
+        int get_victoryCardCount();
     };
 }
