@@ -9,17 +9,19 @@ namespace ariel
         vector<string> typeVector = {"Wheat", "Wood", "Brick", "Sheep", "Wood", "Brick", "Wheat", "Clay", "Sheep", "Clay",
                                "Wood", "Wheat", "Wood", "Wheat", "Sheep", "Wood", "Clay", "Sheep", "Desert"};
         vector<int> idVector = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
-        vector<Tiles> tiles(19);
         for (int i = 0; i < 19; i++)
         {
             if (i != 9)
             {
-                tiles.at(i) = Tiles(idVector.at(i), number_roll.at(i),typeVector.at(i));
+                std::cout <<number_roll[i]<<endl;
+                tiles.emplace_back(Tiles(idVector[i], number_roll[i], typeVector[i]));
+                //tiles.at(i) = Tiles(idVector.at(i), number_roll.at(i),typeVector.at(i));
             }
         }
+        
         tiles.at(9) = Tiles(9,7,"desert");
         // set all the neighbors
-        tiles.at(0).set_neighbor(tiles.at(1), 0);
+        tiles[0].set_neighbor(tiles[1], 0);
         tiles[0].set_neighbor(tiles[3], 3);
         tiles[0].set_neighbor(tiles[4], 4);
         tiles[0].set_neighbor(tiles[1], 5);

@@ -21,7 +21,7 @@ public:
     string gettype() const;
     vector<int> getedges() const;
     vector<vector<int>> getvertex() const;
-    vector<Tiles> getneighbors() const;
+    vector<Tiles*> getneighbors() const;
 
 
     void display_edges() const;
@@ -44,7 +44,7 @@ private:
     string type;
     vector<int> edges;
     vector<vector<int>> vertex;
-    vector<Tiles> neighbors;
+    Tiles* neighbors[6];
 
     int check_before_apply(int index, int id);
     int set_special_edges(int index, int id);

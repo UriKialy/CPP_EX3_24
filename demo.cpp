@@ -13,22 +13,21 @@
 
 using namespace std;
 
-namespace ariel {
+using namespace ariel; 
 
 void initialize_game(player &p1, player &p2, player &p3, board &b);
 void print_menu();
 
 int main() {
-    player p1("Orel");
-    cout << p1.getName() << endl; // should print Orel
-    player p2("Nir");
-    cout << p2.getName() << endl; // should print Nir
-    player p3("Amit");
-    cout << p3.getName() << endl; // should print Amit
-
+    player p1("uri");
+    cout << p1.getName() << endl; // should print uri
+    player p2("shon");
+    cout << p2.getName() << endl; // should print shon
+    player p3("natan");
+    cout << p3.getName() << endl; // should print natan
     board b;
     b.print_board();
-
+    cout<<"good1"<<endl;
     resourceCard r1("Wood");
     resourceCard r2("Brick");
     resourceCard r3("Sheep");
@@ -170,7 +169,7 @@ int main() {
                 // trade
                 {
                     int player_id;
-                    cout << "Enter player ID to trade with (1: Orel, 2: Nir, 3: Amit): ";
+                    cout << "Enter player ID to trade with (1: uri, 2: shon, 3: natan): ";
                     cin >> player_id;
                     player *other_player = nullptr;
                     if (player_id == 1) other_player = &p1;
@@ -317,4 +316,3 @@ void initialize_game(player &p1, player &p2, player &p3, board &b) {
     }
 }
 
-} // namespace ariel

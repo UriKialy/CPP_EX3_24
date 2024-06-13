@@ -10,8 +10,8 @@ namespace ariel
     }
     promotion::~promotion() 
     {    }
-    //promotion::promotion() 
-    //{      }
+    promotion::promotion() 
+    {      }
  
 
 }
