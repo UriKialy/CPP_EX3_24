@@ -45,7 +45,7 @@ vector<Tiles> Tiles::getneighbors() const {
 }
 
 void Tiles::display_edges() const {
-    for(int i = 0; i < edges.size(); i++) {
+    for(size_t i = 0; i < edges.size(); i++) {
         cout << edges.at(i) << endl;
     }
 }
@@ -115,11 +115,11 @@ int Tiles::check_before_apply(int index, int id) {
 }
 
 int Tiles::set_special_edges(int index, int id) {
-    bool check_upper = false, left_side = false, right_side = false, bottom = false;
+    bool check_upper = false;
     bool is_edges_occuipied_by_player = this->edges.at((6 + index - 1) % 6) == id || this->edges.at((index + 1) % 6) == id;
     int no_neighbors_edges[] = {0, 7, 10, 16, 18, 11, 2};
     for (int i = 0; i < 6; i++) {
-        if (no_neighbors_edges[i] == this->id && index == i || is_edges_occuipied_by_player) {
+        if ((no_neighbors_edges[i] == this->id) && (index == i || is_edges_occuipied_by_player)) {
             this->edges.at(index) = id;
             return 1;
         }
@@ -631,7 +631,8 @@ void Tiles::set_neighbor(Tiles& neighbor, int index) {
 }
 
 bool Tiles::operator==(const Tiles& other) const {
-    return id == other.id && value_roll == other.value_roll && type == other.type && edges == other.edges && vertex == other.vertex;
+    return id == other.id && value_roll == other.value_roll && type == other.type && edges == other.edges && vertex == other.vertex && neighbors == other.neighbors;
+
 }
 
 Tiles& Tiles::operator=(const Tiles& other) {
@@ -647,7 +648,7 @@ Tiles& Tiles::operator=(const Tiles& other) {
 
 void Tiles::update_collision(int index, int id, int type) {
     for (int i : {index % 6, (index + 1) % 6}) {
-        if (neighbors[i]) {
+        if (!(neighbors[i]==Tiles())) {
             if (i == index % 6) {
                 neighbors[i].vertex[(index + 2) % 6][0] = id;
                 neighbors[i].vertex[(index + 2) % 6][1] = type;

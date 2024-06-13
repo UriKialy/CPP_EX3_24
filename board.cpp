@@ -105,11 +105,14 @@ namespace ariel
         tiles[18].set_neighbor(tiles[14], 1);
         tiles[18].set_neighbor(tiles[17], 2);
     }
-
-    int board::roll_dice()
-    {
-        return rand() % 11 + 2;
+Tiles& board::getTile(int id) {
+    cout << "Accessing tile with id: " << id << endl;
+    int num =tiles.size();
+    if (id < 0 || id >= num) {
+        throw out_of_range("Tile id is out of range: " + to_string(id));
     }
+    return tiles[id];
+}
    
     void board::print_board()
     {
@@ -121,7 +124,7 @@ namespace ariel
         };
 
         board_representation[0] = "       sea   sea   sea   sea   sea       ";
-        board_representation[1] = "    sea " + format_tile(tiles[0].gettype(), tiles[0].getvalue_roll()) + " " + format_tile(tiles[1].gettype(), tiles[1].getvalue_roll()) + " " + format_tile(tiles[2].gettype(), tiles[2].getvalue_roll()) + " sea ";
+        board_representation[1] = "    sea " + format_tile(this->tiles[0].gettype(), this->tiles[0].getvalue_roll()) + " " + format_tile(this->tiles[1].gettype(), this->tiles[1].getvalue_roll()) + " " + format_tile(this->tiles[2].gettype(), this->tiles[2].getvalue_roll()) + " sea ";
         board_representation[2] = "  sea " + format_tile(tiles[3].gettype(), tiles[3].getvalue_roll()) + " " + format_tile(tiles[4].gettype(), tiles[4].getvalue_roll()) + " " + format_tile(tiles[5].gettype(), tiles[5].getvalue_roll()) + " " + format_tile(tiles[6].gettype(), tiles[6].getvalue_roll()) + " sea";
         board_representation[3] = "sea " + format_tile(tiles[7].gettype(), tiles[7].getvalue_roll()) + " " + format_tile(tiles[8].gettype(), tiles[8].getvalue_roll()) + " " + format_tile(tiles[9].gettype(), tiles[9].getvalue_roll()) + " " + format_tile(tiles[18].gettype(), tiles[18].getvalue_roll()) + " " + format_tile(tiles[10].gettype(), tiles[10].getvalue_roll()) + " sea";
         board_representation[4] = "  sea " + format_tile(tiles[11].gettype(), tiles[11].getvalue_roll()) + " " + format_tile(tiles[12].gettype(), tiles[12].getvalue_roll()) + " " + format_tile(tiles[13].gettype(), tiles[13].getvalue_roll()) + " " + format_tile(tiles[14].gettype(), tiles[14].getvalue_roll()) + " sea";

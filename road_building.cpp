@@ -2,7 +2,7 @@
 using namespace std;
 namespace ariel
 {
-    road_building::road_building(string type, vector<resourceCard> price) : road_building(type, price)
+    road_building::road_building(string type, vector<resourceCard> price) : type(type), price(price)
     {    }
     void road_building::display()
     {

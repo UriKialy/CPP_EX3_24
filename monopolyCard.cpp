@@ -3,7 +3,7 @@
 using namespace std;
 namespace ariel
 {
-    monopolyCard::monopolyCard(string type, vector<resourceCard> price) : monopolyCard(type, price)
+    monopolyCard::monopolyCard(string type, vector<resourceCard> price) : type(type), price(price)
     {    }
     void monopolyCard::display()
     {

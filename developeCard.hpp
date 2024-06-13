@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,6 +17,7 @@ namespace ariel
         explicit developeCard() = default;
         virtual string get_type() = 0;
         vector<resourceCard> get_price();
+        void display();
     };
 }
 // this the developCard class which is a base card for promotion, victory, knights

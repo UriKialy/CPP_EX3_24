@@ -13,7 +13,7 @@ namespace ariel
         explicit resourceCard(){
             type = "";
         }
-         string get_type(){
+         string get_type() const{
             return type;
         }       
     };

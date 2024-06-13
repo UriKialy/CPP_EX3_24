@@ -1,17 +1,39 @@
-CC = g++
-CFLAGS = -Wall -Wextra -std=c++14
+# Compiler and flags
+CXX = g++
+CXXFLAGS = -g -std=c++11 -Wall -Wextra -pedantic
 
-SRCS := $(wildcard *.cpp)
-OBJS := $(SRCS:.cpp=.o)
-EXEC := myprogram
+# Directories
+SRC_DIR = .
+OBJ_DIR = obj
+BIN_DIR = bin
+INC_DIR = .
 
-all: $(EXEC)
+# Source files
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
 
-$(EXEC): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+# Object files
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+# Executable name
+TARGET = $(BIN_DIR)/catan
 
+# Create directories if they don't exist
+$(shell mkdir -p $(OBJ_DIR) $(BIN_DIR))
+
+# Default target
+all: $(TARGET)
+
+# Link object files to create executable
+$(TARGET): $(OBJ_FILES)
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+# Compile source files into object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c -o $@ $<
+
+# Clean up object files and executable
 clean:
-	rm -f $(OBJS) $(EXEC)
+	rm -rf $(OBJ_DIR)/*.o $(TARGET)
+
+# Phony targets
+.PHONY: all clean

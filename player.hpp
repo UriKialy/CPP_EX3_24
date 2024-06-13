@@ -8,6 +8,7 @@
 #include "victoryCard.hpp"
 #include "abundanceCard.hpp"
 #include "road_building.hpp"
+#include "monopolyCard.hpp"
 #include "knights.hpp"
 #include <algorithm>
 #include <cstdlib>
@@ -17,6 +18,8 @@
 using namespace std;
 namespace ariel {
 
+    class board;
+
 class player {
 public:
     player(string playerName);
@@ -25,10 +28,10 @@ public:
     string getName() const;
     int getScore() const;
     vector<developeCard*>& getDevelopment_cards();
-    vector<developeCard>& getResources();
+    vector<resourceCard>& getResources();
 
     void add_development_cards(developeCard* card);
-    void add_resources_card(const developeCard& card);
+    void add_resources_card(const resourceCard& card);
     void add_const_score(int score);
     void add_road(string road);
     void add_settlement(string settlement);

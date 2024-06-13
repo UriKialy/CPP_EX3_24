@@ -12,11 +12,15 @@ namespace ariel
         }
         else
         {
-            cout<<"you can't have more than 4 victory cards"<<endl;
+            cout<<"there is no more than 4 victory cards"<<endl;
         }
         
     }
-    int victoryCard::get_victoryCardCount()
+    int victoryCard::victoryCardCount = 0;
+    string victoryCard::get_type(){
+        return type;
+    }
+     int victoryCard::get_victoryCardCount()
     {
         return victoryCardCount;
     }

@@ -13,7 +13,7 @@ namespace ariel
     public:
         static int knightsCount;
         knights(string type, vector<resourceCard> price);
-        
-        int get_knightsCount();
+        string get_type() override;
+        static int get_knightsCount();
     };
 }

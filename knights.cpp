@@ -19,6 +19,10 @@ namespace ariel
     int knights::get_knightsCount(){
         return knightsCount;
     }
+    string knights::get_type()
+    {
+        return type;
     }
+}
    
 

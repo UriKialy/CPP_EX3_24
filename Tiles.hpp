@@ -7,7 +7,9 @@
 
 using namespace std;
 namespace ariel{
+    class player;
 class Tiles {
+
 public:
     Tiles();
     Tiles(int id, int value_roll, const string& type);
@@ -21,6 +23,7 @@ public:
     vector<vector<int>> getvertex() const;
     vector<Tiles> getneighbors() const;
 
+
     void display_edges() const;
     void display_vertex() const;
     void display() const;
@@ -32,7 +35,7 @@ public:
     bool operator==(const Tiles& other) const;
     Tiles& operator=(const Tiles& other);
     bool set_first_round_vertex(player& player, int& index);
-    bool set_first_round_edge(Player& p1, int &index);
+    bool set_first_round_edge(player& p1, int &index);
     void update_collision(int index, int id, int type);
 
 private:

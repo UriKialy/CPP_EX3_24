@@ -14,6 +14,7 @@ namespace ariel{
          static int victoryCardCount;
         victoryCard(string type, vector<resourceCard>& price);        
          void display();
-        int get_victoryCardCount();
+        static int get_victoryCardCount();
+        string get_type() override;
     };
 }

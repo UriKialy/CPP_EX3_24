@@ -1,19 +1,24 @@
-#include "Tiles.hpp"
 #pragma once
+#include "Tiles.hpp"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <ctime>
+
 using namespace std;
 namespace ariel
 {
+    class Tiles;
     class board
     {
         vector<Tiles> tiles;
-        public:
+
+    public:
         board();
-        ~board()=default;
-        Tiles get_tile(int id);
+        ~board() = default;
+        Tiles& getTile(int id);
         string choseRandomType();
-        int roll_dice();
         int choseRandomRole();
         void print_board();
-        
     };
 }

@@ -13,4 +13,14 @@ namespace ariel
     {
         return price;
     }
+    void developeCard::display()
+    {
+        cout << "Type: " << type << endl;
+        cout << "Price: ";
+        for (auto &i : price)
+        {
+            cout << i.get_type() << " ";
+        }
+        cout << endl;
+    }
 }

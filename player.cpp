@@ -1,5 +1,4 @@
 #include "player.hpp"
-
 using namespace std;
 
 namespace ariel {
@@ -10,8 +9,8 @@ namespace ariel {
     }
 
     player::~player() {
-        for (auto card : development_cards) {
-            delete card;
+        for (auto developeCard : development_cards) {
+            delete developeCard;
         }
     }
 
@@ -23,7 +22,7 @@ namespace ariel {
         return score;
     }
 
-    vector<development_card*>& player::getDevelopment_cards() {
+    vector<developeCard*>& player::getDevelopment_cards() {
         return development_cards;
     }
 
@@ -31,11 +30,11 @@ namespace ariel {
         return resources;
     }
 
-    void player::add_development_cards(development_card* card) {
+      void player::add_development_cards(developeCard* card) {
         development_cards.push_back(card);
     }
 
-    void player::add_resources_card(const resources_card& card) {
+    void player::add_resources_card(const resourceCard& card) {
         resources.push_back(card);
     }
 
@@ -124,7 +123,7 @@ namespace ariel {
         }
     }
 
-    int player::use(development_card* card, player& take1, player& take2, board& board1) {
+    int player::use(developeCard* card, player& take1, player& take2, board& board1) {
         string card_type = card->get_type();
         if (card_type == "Victory") {
             processVictoryCard();
@@ -142,7 +141,7 @@ namespace ariel {
 
     bool player::hasResources(const vector<string>& required_resources) const {
         for (const auto& res : required_resources) {
-            if (none_of(resources.begin(), resources.end(), [&](const resources_card& rc) { return rc.get_type() == res; })) {
+            if (none_of(resources.begin(), resources.end(), [&](const resourceCard& rc) { return rc.get_type() == res; })) {
                 return false;
             }
         }
@@ -152,7 +151,7 @@ namespace ariel {
     void player::removeResources(const vector<string>& resources_to_remove) {
         vector<string> to_remove = resources_to_remove;
         for (auto it = to_remove.begin(); it != to_remove.end(); ++it) {
-            auto res_it = find_if(resources.begin(), resources.end(), [&](resources_card& rc) {
+            auto res_it = find_if(resources.begin(), resources.end(), [&](resourceCard& rc) {
                 return rc.get_type() == *it;
             });
             if (res_it != resources.end()) {
@@ -161,12 +160,12 @@ namespace ariel {
         }
     }
 
-    development_card* player::createDevelopmentCard(const string& card_type) {
-        vector<resources_card> price = { resources_card("Sheep"), resources_card("Clay"), resources_card("Wheat") };
-        if (card_type == "Victory") return new victory(card_type, price);
-        if (card_type == "abundanceCard") return new year_of_happy(card_type, price);
-        if (card_type == "Monopoly") return new monopoly(card_type, price);
-        if (card_type == "road_building") return new road_build(card_type, price);
+    developeCard* player::createDevelopmentCard(const string& card_type) {
+        vector<resourceCard> price = { resourceCard("Sheep"), resourceCard("Clay"), resourceCard("Wheat") };
+        if (card_type == "Victory") return new victoryCard(card_type, price);
+        if (card_type == "abundanceCard") return new abundanceCard(card_type, price);
+        if (card_type == "Monopoly") return new monopolyCard(card_type, price);
+        if (card_type == "road_building") return new road_building(card_type, price);
         return new knights(card_type, price);
     }
 
@@ -177,7 +176,7 @@ namespace ariel {
     }
 
     void player::processKnightCard() {
-        if (count_if(development_cards.begin(), development_cards.end(), [](development_card* c) { return c->get_type() == "Knight"; }) >= 3) {
+        if (count_if(development_cards.begin(), development_cards.end(), [](developeCard* c) { return c->get_type() == "Knight"; }) >= 3) {
             add_const_score(2);
             removeCardOfType("Knight");
         }
@@ -187,8 +186,8 @@ namespace ariel {
         cout << "Choose a resource to monopolize: ";
         string resource;
         cin >> resource;
-        takeResourceFromplayer(take1, resource);
-        takeResourceFromplayer(take2, resource);
+        takeResourceFromPlayer(take1, resource);
+        takeResourceFromPlayer(take2, resource);
         removeCardOfType("Monopoly");
     }
 
@@ -197,7 +196,7 @@ namespace ariel {
             cout << "Choose a resource you want to take: ";
             string resource;
             cin >> resource;
-            add_resources_card(resources_card(resource));
+            add_resources_card(resourceCard(resource));
         }
         removeCardOfType("abundanceCard");
     }
@@ -216,7 +215,7 @@ namespace ariel {
     }
 
     bool player::removeCardOfType(const string& card_type) {
-        auto it = find_if(development_cards.begin(), development_cards.end(), [&](development_card* c) { return c->get_type() == card_type; });
+        auto it = find_if(development_cards.begin(), development_cards.end(), [&](developeCard* c) { return c->get_type() == card_type; });
         if (it != development_cards.end()) {
             delete *it;
             development_cards.erase(it);
@@ -225,9 +224,9 @@ namespace ariel {
         return false;
     }
 
-    void player::takeResourceFromplayer(player& player, const string& resource) {
+    void player::takeResourceFromPlayer(player& player, const string& resource) {
         auto& player_resources = player.getResources();
-        auto it = remove_if(player_resources.begin(), player_resources.end(), [&](resources_card& rc) { return rc.get_type() == resource; });
+        auto it = remove_if(player_resources.begin(), player_resources.end(), [&](resourceCard& rc) { return rc.get_type() == resource; });
         resources.insert(resources.end(), player_resources.begin(), it);
         player_resources.erase(it, player_resources.end());
     }
@@ -294,26 +293,26 @@ namespace ariel {
 
                             if (id == p1.getid()) {
                                 if (type == 2) {
-                                    p1.add_resources_card(resources_card(b.getTile(i).gettype()));
-                                    p1.add_resources_card(resources_card(b.getTile(i).gettype()));
+                                    p1.add_resources_card(resourceCard(b.getTile(i).gettype()));
+                                    p1.add_resources_card(resourceCard(b.getTile(i).gettype()));
                                 } else if (type == 1) {
-                                    p1.add_resources_card(resources_card(b.getTile(i).gettype()));
+                                    p1.add_resources_card(resourceCard(b.getTile(i).gettype()));
                                 }
                             }
                             if (id == p2.getid()) {
                                 if (type == 2) {
-                                    p2.add_resources_card(resources_card(b.getTile(i).gettype()));
-                                    p2.add_resources_card(resources_card(b.getTile(i).gettype()));
+                                    p2.add_resources_card(resourceCard(b.getTile(i).gettype()));
+                                    p2.add_resources_card(resourceCard(b.getTile(i).gettype()));
                                 } else if (type == 1) {
-                                    p2.add_resources_card(resources_card(b.getTile(i).gettype()));
+                                    p2.add_resources_card(resourceCard(b.getTile(i).gettype()));
                                 }
                             }
                             if (id == getid()) {
                                 if (type == 2) {
-                                    add_resources_card(resources_card(b.getTile(i).gettype()));
-                                    add_resources_card(resources_card(b.getTile(i).gettype()));
+                                    add_resources_card(resourceCard(b.getTile(i).gettype()));
+                                    add_resources_card(resourceCard(b.getTile(i).gettype()));
                                 } else if (type == 1) {
-                                    add_resources_card(resources_card(b.getTile(i).gettype()));
+                                    add_resources_card(resourceCard(b.getTile(i).gettype()));
                                 }
                             }
                         } catch (const out_of_range& e) {
@@ -419,7 +418,7 @@ namespace ariel {
 
     void player::display_resources() {
         cout << getName() << " your resources are: " << endl;
-        for (const auto& res : resources) {
+        for ( auto& res : resources) {
             cout << res.get_type() << endl;
         }
     }
@@ -449,8 +448,8 @@ namespace ariel {
         cin >> resource_take;
         cout << "Enter the resource you want to give: ";
         cin >> resource_give;
-        vector<resources_card> resources_take = ask1.getResources();
-        vector<resources_card> resources2_give = getResources();
+        vector<resourceCard> resources_take = ask1.getResources();
+        vector<resourceCard> resources2_give = getResources();
         vector<string> resources_give_str = splitStringByComma(resource_give);
         vector<string> resources_take_str = splitStringByComma(resource_take);
         cout << "The offer is take: " << resource_take << " give: " << resource_give << endl;
@@ -462,10 +461,10 @@ namespace ariel {
                 this->removeResources(resources_give_str);
                 ask1.removeResources(resources_take_str);
                 for (const auto& res : resources_give_str) {
-                    ask1.add_resources_card(resources_card(res));
+                    ask1.add_resources_card(resourceCard(res));
                 }
                 for (const auto& res : resources_take_str) {
-                    this->add_resources_card(resources_card(res));
+                    this->add_resources_card(resourceCard(res));
                 }
                 cout << "Trade was accepted" << endl;
                 cout << "Your resources after trade: " << endl;
