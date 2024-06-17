@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <random>
 #include "resourceCard.hpp"
 #include "developeCard.hpp"
 #include "board.hpp"

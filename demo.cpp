@@ -13,9 +13,9 @@
 
 using namespace std;
 
-using namespace ariel; 
+using namespace ariel;
 
-void initialize_game(player &p1, player &p2, player &p3, board &b);
+void initGame(player &p1, player &p2, player &p3, board &b);
 void print_menu();
 
 int main() {
@@ -67,7 +67,7 @@ int main() {
     p2.display_resources();
     p3.display_resources();
 
-    initialize_game(p1, p2, p3, b);
+    initGame(p1, p2, p3, b);
 
     int turn = 0;
     player *curr_player = nullptr;
@@ -224,7 +224,7 @@ void print_menu() {
     cout << "13. End Turn" << endl;
 }
 
-void initialize_game(player &p1, player &p2, player &p3, board &b) {
+void initGame(player &p1, player &p2, player &p3, board &b) {
     int tile, edge, vertex;
     int counter_roads = 0;
     int counter_settlement = 0;

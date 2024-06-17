@@ -15,9 +15,10 @@ namespace ariel
     public:
         developeCard(string type, vector<resourceCard> price);
         explicit developeCard() = default;
-        virtual string get_type() = 0;
+        virtual string get_type()=0;
         vector<resourceCard> get_price();
         void display();
+        virtual ~developeCard() = default;
     };
 }
 // this the developCard class which is a base card for promotion, victory, knights

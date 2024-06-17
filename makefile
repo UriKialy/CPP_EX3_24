@@ -1,39 +1,42 @@
-# Compiler and flags
 CXX = g++
-CXXFLAGS = -g -std=c++11 -Wall -Wextra -pedantic
+CXXFLAGS = -Wall -Wextra  -g
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
 
-# Directories
-SRC_DIR = .
-OBJ_DIR = obj
-BIN_DIR = bin
-INC_DIR = .
+Test = Test
+demo = demo
+CatanMain = catan
 
-# Source files
-SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+SRCS = $(wildcard *.cpp)					# Get all the .cpp files in the current directory
+SRCS := $(filter-out $(demo).cpp, $(SRCS))	# Remove the demo file from the list of sources
+SRCS := $(filter-out $(Test).cpp, $(SRCS))	# Remove the test file from the list of sources
+SRCS := $(filter-out $(CatanMain).cpp, $(SRCS))	# Remove the Catan main file from the list of sources
 
-# Object files
-OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
+OBJECTS = $(SRCS:.cpp=.o)
 
-# Executable name
-TARGET = $(BIN_DIR)/catan
 
-# Create directories if they don't exist
-$(shell mkdir -p $(OBJ_DIR) $(BIN_DIR))
+all: $(demo) $(Test) Game
 
-# Default target
-all: $(TARGET)
-
-# Link object files to create executable
-$(TARGET): $(OBJ_FILES)
+$(demo): $(OBJECTS) $(demo).cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-# Compile source files into object files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c -o $@ $<
+# Compile
+%.o: %.cpp %.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean up object files and executable
+valgrind: $(demo)
+	valgrind $(VALGRIND_FLAGS) ./$(demo)
+
+catan: $(demo)
+	./$(demo)
+
+$(Test): $(OBJECTS) $(Test).cpp
+	$(CXX) $(CXXFLAGS) -o $@ $^
+	./$(Test)
+
+Game: $(OBJECTS) CatanMain.cpp
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
 clean:
-	rm -rf $(OBJ_DIR)/*.o $(TARGET)
+	rm -f *.o $(demo) $(Test) Game
 
-# Phony targets
-.PHONY: all clean
+.PHONY: all clean valgrind catan
