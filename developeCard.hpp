@@ -17,7 +17,7 @@ namespace ariel
         explicit developeCard() = default;
         virtual string get_type();
         vector<resourceCard> get_price();
-        void display();
+        virtual void display()=0;
         virtual ~developeCard() = default;
     };
 }

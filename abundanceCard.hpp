@@ -9,6 +9,6 @@ namespace ariel
         vector<resourceCard> price;
     public:
         abundanceCard(string type, vector<resourceCard> price) ;
-        void display();
+        void display() override;
     };
 }

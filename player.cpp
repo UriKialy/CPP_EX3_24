@@ -149,14 +149,19 @@ namespace ariel {
         string card_type = card->get_type();
         if (card_type == "victoryCard") {
             processVictoryCard();
+            return 1;
         } else if (card_type == "knights") {
             processKnightCard();
+            return 1;
         } else if (card_type == "monopolyCard") {
             processMonopolyCard(take1, take2);
+            return 1;
         } else if (card_type == "abundanceCard") {
             process_abundanceCard();
+            return 1;
         } else if (card_type == "road_building") {
             processRoadBuildingCard(board1);
+            return 1;
         }
         return 0;
     }
@@ -190,7 +195,7 @@ void player::removeResources(const vector<string>& resources_to_remove) {
 
     developeCard* player::createDevelopmentCard(const string& card_type) {
         vector<resourceCard> price = { resourceCard("wool"), resourceCard("steel"), resourceCard("Wheat") };
-        if (card_type == "victoryCard") return new victoryCard(card_type, price);
+        if (card_type == "victoryCard")  cout<<"torl"<<endl; new victoryCard(card_type, price);
         if (card_type == "abundanceCard") return new abundanceCard(card_type, price);
         if (card_type == "monopolyCard") return new monopolyCard(card_type, price);
         if (card_type == "road_building") return new road_building(card_type, price);
@@ -198,6 +203,7 @@ void player::removeResources(const vector<string>& resources_to_remove) {
     }
 
     void player::processVictoryCard() {
+
         if (removeCardOfType("victoryCard")) {
             add_points(1);
         }
@@ -205,7 +211,7 @@ void player::removeResources(const vector<string>& resources_to_remove) {
 
     void player::processKnightCard() {
         if (count_if(development_cards.begin(), development_cards.end(), [](developeCard* c) { return c->get_type() == "knights"; }) >= 3) {
-            add_points(2);
+            this->add_points(2);
             removeCardOfType("knights");
         }
     }

@@ -13,6 +13,6 @@ namespace ariel
         vector<resourceCard> price;
     public:
         monopolyCard(string type, vector<resourceCard> price); // Added closing parenthesis here
-        void display();
+        void display() override;
     };
 }
