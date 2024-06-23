@@ -9,7 +9,6 @@
 #include "monopolyCard.hpp"
 #include "knights.hpp"
 #include "victoryCard.hpp"
-#include "catan.hpp"
 
 using namespace std;
 
@@ -18,7 +17,7 @@ using namespace ariel;
 void initGame(player &p1, player &p2, player &p3, board &b);
 void print_menu();
 
-int main() {
+int main1() {
     player p1("uri");
     cout << p1.getName() << endl; // should print uri
     player p2("shon");
@@ -30,38 +29,39 @@ int main() {
     cout<<"good1"<<endl;
     resourceCard r1("Wood");
     resourceCard r2("Brick");
-    resourceCard r3("Sheep");
+    resourceCard r3("wool");
     resourceCard r4("Wheat");
-    resourceCard r5("Clay");
+    resourceCard r5("steel");
     resourceCard r6("Wood");
     resourceCard r7("Brick");
-    resourceCard r8("Sheep");
+    resourceCard r8("wool");
     resourceCard r9("Wheat");
-    resourceCard r10("Clay");
+    resourceCard r10("steel");
     resourceCard r11("Wood");
     resourceCard r12("Brick");
-    resourceCard r13("Sheep");
+    resourceCard r13("wool");
     resourceCard r14("Wheat");
-    resourceCard r15("Clay");
+    resourceCard r15("steel");
 
+    
     // Adding resources to players
-    p1.add_resources_card(r1);
-    p1.add_resources_card(r2);
-    p1.add_resources_card(r3);
-    p1.add_resources_card(r4);
-    p1.add_resources_card(r5);
+    p1.add_resourceCard(r1);
+    p1.add_resourceCard(r2);
+    p1.add_resourceCard(r3);
+    p1.add_resourceCard(r4);
+    p1.add_resourceCard(r5);
 
-    p2.add_resources_card(r6);
-    p2.add_resources_card(r7);
-    p2.add_resources_card(r8);
-    p2.add_resources_card(r9);
-    p2.add_resources_card(r10);
+    p2.add_resourceCard(r6);
+    p2.add_resourceCard(r7);
+    p2.add_resourceCard(r8);
+    p2.add_resourceCard(r9);
+    p2.add_resourceCard(r10);
 
-    p3.add_resources_card(r11);
-    p3.add_resources_card(r12);
-    p3.add_resources_card(r13);
-    p3.add_resources_card(r14);
-    p3.add_resources_card(r15);
+    p3.add_resourceCard(r11);
+    p3.add_resourceCard(r12);
+    p3.add_resourceCard(r13);
+    p3.add_resourceCard(r14);
+    p3.add_resourceCard(r15);
 
     p1.display_resources();
     p2.display_resources();

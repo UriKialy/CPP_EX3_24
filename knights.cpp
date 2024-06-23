@@ -3,7 +3,7 @@ using namespace std;
 namespace ariel
 {
     int knights::knightsCount = 0;
-    knights::knights(string type, vector<resourceCard> price) : developeCard(type, price)
+    knights::knights(string type, vector<resourceCard> price) : type(type), price(price)
     {
         if (knightsCount < 4)
         {

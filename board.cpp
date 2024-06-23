@@ -6,8 +6,8 @@ namespace ariel
     board::board() // constructor for the board
     {
         vector<int> number_roll = {5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 11, 3, 4, 5, 6, 0};
-        vector<string> typeVector = {"Wheat", "Wood", "Brick", "Sheep", "Wood", "Brick", "Wheat", "Clay", "Sheep", "Clay",
-                               "Wood", "Wheat", "Wood", "Wheat", "Sheep", "Wood", "Clay", "Sheep", "Desert"};
+        vector<string> typeVector = {"Wheat", "Wood", "Brick", "wool", "Wood", "Brick", "Wheat", "steel", "Sheep", "steel",
+                               "Wood", "Wheat", "Wood", "Wheat", "Sheep", "Wood", "steel", "Sheep", "Desert"};
         vector<int> idVector = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
         for (int i = 0; i < 19; i++)
         {

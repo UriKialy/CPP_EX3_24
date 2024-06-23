@@ -1,57 +1,50 @@
 #pragma once
-
 #include <iostream>
 #include <vector>
 #include <string>
 #include "player.hpp"
+#include <algorithm>
 
-using namespace std;
-namespace ariel{
-    class player;
-class Tiles {
+namespace ariel
+{
+    class player; 
+    class Tiles
+    {
+    public:
+        Tiles();
+        Tiles(int id, int value_roll, const std::string &type);
+        Tiles(const Tiles &other);
+        ~Tiles();
 
-public:
-    Tiles();
-    Tiles(int id, int value_roll, const string& type);
-    Tiles(const Tiles& other);
-    ~Tiles();
+        int getid() const;
+        int getvalue_roll() const;
+        std::string gettype();
+        std::vector<int> getedges();
+        std::vector<std::vector<int>> getvertex();
+        std::vector<Tiles *> getneighborhood();
+        int setedges(int index, int id);
+        int set_vertex(int index, int type, int player_id);
+        void set_neighbor(Tiles &neighbor, int index);
+        void update_collision(int index, int id, int type);
+        void display_edges();
+        void display_vertixes();
+        bool operator==(const Tiles &other) const;
+        Tiles &operator=(const Tiles &other);
+        void display() const;
+        int set_special_edges(int index, int id);
+        int check_before_apply(int index, int id);
+        int apply_edges(int index, int id);
+        bool set_first_round_vertex(player &player, int &index);
+        bool set_first_round_edge(player &p1, int &index);
 
-    int getid() const;
-    int getvalue_roll() const;
-    string gettype() const;
-    vector<int> getedges() const;
-    vector<vector<int>> getvertex() const;
-    vector<Tiles*> getneighbors() const;
-
-
-    void display_edges() const;
-    void display_vertex() const;
-    void display() const;
-
-    int setedges(int index, int id);
-    int set_vertex(int index, int type, int player_id);
-    void set_neighbor(Tiles& neighbor, int index);
-
-    bool operator==(const Tiles& other) const;
-    Tiles& operator=(const Tiles& other);
-    bool set_first_round_vertex(player& player, int& index);
-    bool set_first_round_edge(player& p1, int &index);
-    void update_collision(int index, int id, int type);
-
-private:
-    int id;
-    int value_roll;
-    string type;
-    vector<int> edges;
-    vector<vector<int>> vertex;
-    Tiles* neighbors[6];
-
-    int check_before_apply(int index, int id);
-    int set_special_edges(int index, int id);
-    int apply_edges(int index, int id);
-    bool check_roads_set_vertex(int index, int type, int player_id);
-    bool check_edges(int index, int type, int player_id);
-};
-}// namespace ariel
-
-
+    private:
+        int id;
+        int value_roll;
+        std::string type;
+        std::vector<int> edges;
+        std::vector<std::vector<int>> vertexes;
+        bool check_roads_set_vertex(int index, int type, int player_id);
+        bool check_edges(int index, int type, int player_id);
+        Tiles *neighbors[6];
+    };
+} // namespace ariel
