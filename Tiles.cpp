@@ -13,7 +13,7 @@ namespace ariel
         }
     }
 
-    Tiles::Tiles(int id, int value_roll, const std::string &type) : id(id), value_roll(value_roll), type(type)
+    Tiles::Tiles(int id, int value_roll, const string &type) : id(id), value_roll(value_roll), type(type)
     {
         this->edges = {0, 0, 0, 0, 0, 0};
         this->vertexes = {{0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}};
@@ -46,42 +46,41 @@ namespace ariel
         return value_roll;
     }
 
-    std::string Tiles::gettype()
+    string Tiles::gettype()
     {
         return type;
     }
 
-    std::vector<int> Tiles::getedges()
+    vector<int> Tiles::getedges()
     {
         return edges;
     }
 
-    std::vector<std::vector<int>> Tiles::getvertex()
+    vector<vector<int>> Tiles::getvertex()
     {
         return vertexes;
     }
 
-    std::vector<Tiles *> Tiles::getneighborhood()
+    vector<Tiles *> Tiles::getneighborhood()
     {
-        std::vector<Tiles *> neighborhood_list(neighbors, neighbors + 6);
+        vector<Tiles *> neighborhood_list(neighbors, neighbors + 6);
         return neighborhood_list;
     }
     void Tiles::display_edges()
     {
-        for (int i = 0; i < edges.size(); i++)
+        for (size_t i = 0; i < edges.size(); i++)
         {
-            std::cout << edges.at(i) << std::endl;
+            cout << edges.at(i) << endl;
         }
     }
     void Tiles::display_vertixes()
     {
         int counter = 0;
-        for (int i = 0; i < vertexes.size(); i++)
+        for (size_t i = 0; i < vertexes.size(); i++)
         {
             counter++;
         }
-    std:
-        cout << "ll" << counter << std::endl;
+        cout << "ll" << counter << endl;
     }
 
     int Tiles::setedges(int index, int id) // edge is the id of the edge and id is the id of the user
@@ -110,7 +109,7 @@ namespace ariel
                 check_firstedge = getneighborhood().at((index + 1) % 6)->getedges().at((index + 3) % 6) == 0;
             }
         }
-        catch (const std::exception &e)
+        catch (const exception &e)
         {
             cout << "Error checking first edge: " << e.what() << endl;
             check_firstedge = true; // Assume failure if exception occurs
@@ -123,7 +122,7 @@ namespace ariel
                 check_neighbor_edges1 = getneighborhood().at((index + 1) % 6)->getedges().at((index + 2) % 6) == 0;
             }
         }
-        catch (const std::exception &e)
+        catch (const exception &e)
         {
             cout << "Error checking neighbor edge 1: " << e.what() << endl;
             check_neighbor_edges1 = true; // Assume failure if exception occurs
@@ -136,7 +135,7 @@ namespace ariel
                 check_neighbor_edges2 = getneighborhood().at((index + 1) % 6)->getedges().at((index + 4) % 6) == 0;
             }
         }
-        catch (const std::exception &e)
+        catch (const exception &e)
         {
             cout << "Error checking neighbor edge 2: " << e.what() << endl;
             check_neighbor_edges2 = true; // Assume failure if exception occurs
@@ -166,12 +165,12 @@ namespace ariel
     // function for special Tiless that need special checks
     int Tiles::set_special_edges(int index, int id)
     {
-        bool check_upper = false, left_side = false, right_side = false, bottom = false;
+        bool check_upper = false;
         bool is_edges_occuipied_by_player = this->edges.at((6 + index - 1) % 6) == id || this->edges.at((index + 1) % 6) == id;
         int no_neighbors_edges[] = {0, 7, 10, 16, 18, 11, 2};
         for (int i = 0; i < 6; i++)
         {
-            if (no_neighbors_edges[i] == this->id && index == i || is_edges_occuipied_by_player)
+            if (no_neighbors_edges[i] == this->id && (index == i || is_edges_occuipied_by_player))
             {
                 this->edges.at(index) = id;
                 return 1;
@@ -190,7 +189,7 @@ namespace ariel
                             check_upper = getneighborhood().at(5)->getedges().at(0) == id || getneighborhood().at(5)->getedges().at(1) == id;
                         }
                     }
-                    catch (const std::exception &e)
+                    catch (const exception &e)
                     {
                         cout << "Error checking upper edge: " << e.what() << endl;
                     }
@@ -205,7 +204,7 @@ namespace ariel
                         check_upper = getneighborhood().at(2)->getedges().at(5) == id || getneighborhood().at(2)->getedges().at(4) == id;
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
                     cout << "Error checking upper edge: " << e.what() << endl;
                 }
@@ -329,7 +328,7 @@ namespace ariel
                 getneighborhood().at((index + 1) % 6)->getedges().at((index + 3) % 6) = id;
             }
         }
-        catch (const std::exception &e)
+        catch (const exception &e)
         {
             cout << "Error applying edge to neighbor: " << e.what() << endl;
         }
@@ -338,11 +337,11 @@ namespace ariel
 
     int Tiles::set_vertex(int index, int type, int player_id)
     {
-        std::cout << "dani" << std::endl;
+        cout << "dani" << endl;
         bool check1 = check_roads_set_vertex(index, type, player_id);
-        std::cout << "uri" << check1 << std::endl;
+        cout << "uri" << check1 << endl;
         bool check2 = check_edges(index, type, player_id);
-        std::cout << "orel" << check2 << std::endl;
+        cout << "orel" << check2 << endl;
         if (check1 && check2)
         {
             vertexes.at(0)[index] = player_id;
@@ -356,12 +355,12 @@ namespace ariel
     }
     bool Tiles::check_roads_set_vertex(int index, int type, int player_id)
     {
-        std::cout << "Entering check_roads_set_vertex with index: " << index << std::endl;
+        cout << "Entering check_roads_set_vertex with index: " << index << endl;
         try
         {
             if (index == 0)
             {
-                std::cout << "Checking index 0" << std::endl;
+                cout << "Checking index 0" << endl;
                 bool check_first_side = (vertexes.at(0).at(0) != player_id && vertexes.at(0).at(0) != 0) ||
                                         (vertexes.at(0).at(5) != player_id && vertexes.at(0).at(5) != 0);
                 bool check_second_side = check_first_side;
@@ -372,11 +371,11 @@ namespace ariel
                     {
                         check_first_side = check_first_side || (getneighborhood().at(0)->getvertex().at(0).at(1) != player_id && getneighborhood().at(0)->getvertex().at(0).at(1) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_first_side at index 0" << std::endl;
+                    cout << "Checked getneighborhood() for check_first_side at index 0" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_first_side: " << e.what() << "\n";
+                    cerr << "Error in check_first_side: " << e.what() << "\n";
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -386,11 +385,11 @@ namespace ariel
                     {
                         check_second_side = check_second_side || (getneighborhood().at(1)->getvertex().at(0).at(5) != player_id && getneighborhood().at(1)->getvertex().at(0).at(5) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_second_side at index 0" << std::endl;
+                    cout << "Checked getneighborhood() for check_second_side at index 0" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_second_side: " << e.what() << "\n";
+                    cerr << "Error in check_second_side: " << e.what() << "\n";
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -402,7 +401,7 @@ namespace ariel
             }
             else if (index == 1)
             {
-                std::cout << "Checking index 1" << std::endl;
+                cout << "Checking index 1" << endl;
                 bool check_first_side = (vertexes.at(0).at(1) != player_id && vertexes.at(0).at(1) != 0) ||
                                         (vertexes.at(0).at(0) != player_id && vertexes.at(0).at(0) != 0);
                 bool check_second_side = check_first_side;
@@ -413,11 +412,11 @@ namespace ariel
                     {
                         check_first_side = check_first_side || (getneighborhood().at(1)->getvertex().at(0).at(3) != player_id && getneighborhood().at(1)->getvertex().at(0).at(3) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_first_side at index 1" << std::endl;
+                    cout << "Checked getneighborhood() for check_first_side at index 1" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_first_side: " << e.what() << "\n";
+                    cerr << "Error in check_first_side: " << e.what() << "\n";
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -427,11 +426,11 @@ namespace ariel
                     {
                         check_second_side = check_second_side || (getneighborhood().at(2)->getvertex().at(0).at(5) != player_id && getneighborhood().at(2)->getvertex().at(0).at(5) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_second_side at index 1" << std::endl;
+                    cout << "Checked getneighborhood() for check_second_side at index 1" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_second_side: " << e.what() << "\n";
+                    cerr << "Error in check_second_side: " << e.what() << "\n";
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -443,7 +442,7 @@ namespace ariel
             }
             else if (index == 2)
             {
-                std::cout << "Checking index 2" << std::endl;
+                cout << "Checking index 2" << endl;
                 bool check_first_side = (vertexes.at(0).at(2) != player_id && vertexes.at(0).at(2) != 0) ||
                                         (vertexes.at(0).at(1) != player_id && vertexes.at(0).at(1) != 0);
                 bool check_second_side = check_first_side;
@@ -454,11 +453,11 @@ namespace ariel
                     {
                         check_first_side = check_first_side || (getneighborhood().at(2)->getvertex().at(0).at(4) != player_id && getneighborhood().at(2)->getvertex().at(0).at(4) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_first_side at index 2" << std::endl;
+                    cout << "Checked getneighborhood() for check_first_side at index 2" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_first_side: " << e.what() << "\n";
+                    cerr << "Error in check_first_side: " << e.what() << "\n";
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -468,11 +467,11 @@ namespace ariel
                     {
                         check_second_side = check_second_side || (getneighborhood().at(3)->getvertex().at(0).at(0) != player_id && getneighborhood().at(3)->getvertex().at(0).at(0) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_second_side at index 2" << std::endl;
+                    cout << "Checked getneighborhood() for check_second_side at index 2" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_second_side: " << e.what() << "\n";
+                    cerr << "Error in check_second_side: " << e.what() << "\n";
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -484,7 +483,7 @@ namespace ariel
             }
             else if (index == 3)
             {
-                std::cout << "Checking index 3" << std::endl;
+                cout << "Checking index 3" << endl;
                 bool check_first_side = (vertexes.at(0).at(3) != player_id && vertexes.at(0).at(3) != 0) ||
                                         (vertexes.at(0).at(2) != player_id && vertexes.at(0).at(2) != 0);
                 bool check_second_side = check_first_side;
@@ -495,11 +494,11 @@ namespace ariel
                     {
                         check_first_side = check_first_side || (getneighborhood().at(3)->getvertex().at(0).at(5) != player_id && getneighborhood().at(3)->getvertex().at(0).at(5) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_first_side at index 3" << std::endl;
+                    cout << "Checked getneighborhood() for check_first_side at index 3" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_first_side: " << e.what() << "\n";
+                    cerr << "Error in check_first_side: " << e.what() << "\n";
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -509,11 +508,11 @@ namespace ariel
                     {
                         check_second_side = check_second_side || (getneighborhood().at(4)->getvertex().at(0).at(1) != player_id && getneighborhood().at(4)->getvertex().at(0).at(1) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_second_side at index 3" << std::endl;
+                    cout << "Checked getneighborhood() for check_second_side at index 3" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_second_side: " << e.what() << "\n";
+                    cerr << "Error in check_second_side: " << e.what() << "\n";
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -525,7 +524,7 @@ namespace ariel
             }
             else if (index == 4)
             {
-                std::cout << "Checking index 4" << std::endl;
+                cout << "Checking index 4" << endl;
                 bool check_first_side = (vertexes.at(0).at(4) != player_id && vertexes.at(0).at(4) != 0) ||
                                         (vertexes.at(0).at(3) != player_id && vertexes.at(0).at(3) != 0);
                 bool check_second_side = check_first_side;
@@ -536,11 +535,11 @@ namespace ariel
                     {
                         check_first_side = check_first_side || (getneighborhood().at(4)->getvertex().at(0).at(0) != player_id && getneighborhood().at(4)->getvertex().at(0).at(0) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_first_side at index 4" << std::endl;
+                    cout << "Checked getneighborhood() for check_first_side at index 4" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_first_side: " << e.what() << "\n";
+                    cerr << "Error in check_first_side: " << e.what() << "\n";
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -550,11 +549,11 @@ namespace ariel
                     {
                         check_second_side = check_second_side || (getneighborhood().at(5)->getvertex().at(0).at(2) != player_id && getneighborhood().at(5)->getvertex().at(0).at(2) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_second_side at index 4" << std::endl;
+                    cout << "Checked getneighborhood() for check_second_side at index 4" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_second_side: " << e.what() << "\n";
+                    cerr << "Error in check_second_side: " << e.what() << "\n";
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -566,7 +565,7 @@ namespace ariel
             }
             else if (index == 5)
             {
-                std::cout << "Checking index 5" << std::endl;
+                cout << "Checking index 5" << endl;
                 bool check_first_side = (vertexes.at(0).at(5) != player_id && vertexes.at(0).at(5) != 0) ||
                                         (vertexes.at(0).at(4) != player_id && vertexes.at(0).at(4) != 0);
                 bool check_second_side = check_first_side;
@@ -577,11 +576,11 @@ namespace ariel
                     {
                         check_first_side = check_first_side || (getneighborhood().at(5)->getvertex().at(0).at(1) != player_id && getneighborhood().at(5)->getvertex().at(0).at(1) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_first_side at index 5" << std::endl;
+                    cout << "Checked getneighborhood() for check_first_side at index 5" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_first_side: " << e.what() << "\n";
+                    cerr << "Error in check_first_side: " << e.what() << "\n";
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -591,11 +590,11 @@ namespace ariel
                     {
                         check_second_side = check_second_side || (getneighborhood().at(0)->getvertex().at(0).at(3) != player_id && getneighborhood().at(0)->getvertex().at(0).at(3) != 0);
                     }
-                    std::cout << "Checked getneighborhood() for check_second_side at index 5" << std::endl;
+                    cout << "Checked getneighborhood() for check_second_side at index 5" << endl;
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error in check_second_side: " << e.what() << "\n";
+                    cerr << "Error in check_second_side: " << e.what() << "\n";
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -606,9 +605,9 @@ namespace ariel
                 return true;
             }
         }
-        catch (const std::exception &e)
+        catch (const exception &e)
         {
-            std::cerr << "Error in outer try block: " << e.what() << "\n";
+            cerr << "Error in outer try block: " << e.what() << "\n";
             return false;
         }
         return false; // Default return value in case index does not match any condition
@@ -631,9 +630,9 @@ namespace ariel
                         check_first_side = check_first_side || (getneighborhood().at(0)->getedges().at(1) != player_id && getneighborhood().at(0)->getedges().at(1) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -644,9 +643,9 @@ namespace ariel
                         check_second_side = check_second_side || (getneighborhood().at(1)->getedges().at(5) != player_id && getneighborhood().at(1)->getedges().at(5) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -669,9 +668,9 @@ namespace ariel
                         check_first_side = check_first_side || (getneighborhood().at(1)->getedges().at(3) != player_id && getneighborhood().at(1)->getedges().at(3) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -682,9 +681,9 @@ namespace ariel
                         check_second_side = check_second_side || (getneighborhood().at(2)->getedges().at(5) != player_id && getneighborhood().at(2)->getedges().at(5) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -707,9 +706,9 @@ namespace ariel
                         check_first_side = check_first_side || (getneighborhood().at(2)->getedges().at(4) != player_id && getneighborhood().at(2)->getedges().at(4) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -720,9 +719,9 @@ namespace ariel
                         check_second_side = check_second_side || (getneighborhood().at(3)->getedges().at(0) != player_id && getneighborhood().at(3)->getedges().at(0) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -745,9 +744,9 @@ namespace ariel
                         check_first_side = check_first_side || (getneighborhood().at(3)->getedges().at(5) != player_id && getneighborhood().at(3)->getedges().at(5) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -758,9 +757,9 @@ namespace ariel
                         check_second_side = check_second_side || (getneighborhood().at(4)->getedges().at(1) != player_id && getneighborhood().at(4)->getedges().at(1) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -783,9 +782,9 @@ namespace ariel
                         check_first_side = check_first_side || (getneighborhood().at(4)->getedges().at(0) != player_id && getneighborhood().at(4)->getedges().at(0) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -796,9 +795,9 @@ namespace ariel
                         check_second_side = check_second_side || (getneighborhood().at(5)->getedges().at(2) != player_id && getneighborhood().at(5)->getedges().at(2) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -821,9 +820,9 @@ namespace ariel
                         check_first_side = check_first_side || (getneighborhood().at(5)->getedges().at(1) != player_id && getneighborhood().at(5)->getedges().at(1) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_first_side = true; // Assume failure if exception occurs
                 }
 
@@ -834,9 +833,9 @@ namespace ariel
                         check_second_side = check_second_side || (getneighborhood().at(0)->getedges().at(3) != player_id && getneighborhood().at(0)->getedges().at(3) != 0);
                     }
                 }
-                catch (const std::exception &e)
+                catch (const exception &e)
                 {
-                    std::cerr << "Error: " << e.what() << '\n';
+                    cerr << "Error: " << e.what() << '\n';
                     check_second_side = true; // Assume failure if exception occurs
                 }
 
@@ -847,9 +846,9 @@ namespace ariel
                 return true;
             }
         }
-        catch (const std::exception &e)
+        catch (const exception &e)
         {
-            std::cerr << "Error: " << e.what() << '\n';
+            cerr << "Error: " << e.what() << '\n';
             return false;
         }
         return false; // Default return value in case index does not match any condition
@@ -857,34 +856,34 @@ namespace ariel
 
     void Tiles::display() const
     {
-        std::cout << "Tiles ID: " << id << std::endl;
-        std::cout << "Value Roll: " << value_roll << std::endl;
-        std::cout << "Type: " << type << std::endl;
-        std::cout << "Edges: ";
+        cout << "Tiles ID: " << id << endl;
+        cout << "Value Roll: " << value_roll << endl;
+        cout << "Type: " << type << endl;
+        cout << "Edges: ";
         for (int i = 0; i < 6; ++i)
         {
-            std::cout << edges[i] << " ";
+            cout << edges[i] << " ";
         }
-        std::cout << std::endl;
-        std::cout << "Vertexes: ";
+        cout << endl;
+        cout << "Vertexes: ";
         for (int i = 0; i < 6; ++i)
         {
-            std::cout << vertexes.at(0)[i] << " ";
+            cout << vertexes.at(0)[i] << " ";
         }
-        std::cout << std::endl;
-        std::cout << "Neighborhood: ";
+        cout << endl;
+        cout << "Neighborhood: ";
         for (int i = 0; i < 6; ++i)
         {
             if (neighbors[i])
             {
-                std::cout << neighbors[i]->getid() << " ";
+                cout << neighbors[i]->getid() << " ";
             }
             else
             {
-                std::cout << "0 ";
+                cout << "0 ";
             }
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 
 bool Tiles::set_first_round_vertex(player &player, int &index)
@@ -892,19 +891,19 @@ bool Tiles::set_first_round_vertex(player &player, int &index)
     // Set initial vertex where index is the vertex number
     if (index < 0 || index >= 7)
     {
-        std::cerr << "Index out of bounds." << std::endl;
+        cerr << "Index out of bounds." << endl;
         return false;
     }
     if (vertexes.at(0)[index] == 0)
     { // Check if the vertex is empty
         vertexes.at(0)[index] = player.getid(); // Set player ID
         vertexes.at(1)[index] = 1;
-        std::string settlement_path = "the Tiles " + std::to_string(this->id) + " put settlement in vertex " + std::to_string(index) + "\n";
+        string settlement_path = "the Tiles " + to_string(this->id) + " put settlement in vertex " + to_string(index) + "\n";
         // Set initial building type (settlement)
         player.add_settlement(settlement_path);
 
         // Check and print available positions for setting roads
-        std::vector<int> available_positions;
+        vector<int> available_positions;
         if (edges[index] == 0)
             available_positions.push_back(index);
         if (edges[(index + 1) % 6] == 0)
@@ -918,12 +917,12 @@ bool Tiles::set_first_round_vertex(player &player, int &index)
         {
             neighbor1 = getneighborhood().at(neighbor1_index);
         }
-        catch (const std::out_of_range&) {}
+        catch (const out_of_range&) {}
         try
         {
             neighbor2 = getneighborhood().at(neighbor2_index);
         }
-        catch (const std::out_of_range&) {}
+        catch (const out_of_range&) {}
 
         if (neighbor1 && neighbor1->getedges().at(neighbor2_index) == 0)
             available_positions.push_back(7); // Adding option 7 for neighbor
@@ -947,7 +946,7 @@ bool Tiles::set_first_round_vertex(player &player, int &index)
         while (!valid_choice)
         {
             cin >> road_index;
-            if (std::find(available_positions.begin(), available_positions.end(), road_index) != available_positions.end())
+            if (find(available_positions.begin(), available_positions.end(), road_index) != available_positions.end())
             {
                 valid_choice = true;
             }
@@ -971,13 +970,13 @@ bool Tiles::set_first_round_vertex(player &player, int &index)
         if (road_index == 7)
         {
             neighbor1->getedges().at(neighbor2_index) = player.getid();
-            std::string road_path = "the Tiles " + std::to_string(neighbor1->getid()) + " put road in edge " + std::to_string(neighbor2_index) + "\n";
+            string road_path = "the Tiles " + to_string(neighbor1->getid()) + " put road in edge " + to_string(neighbor2_index) + "\n";
             player.add_road(road_path);
         }
         else
         {
             edges[road_index] = player.getid(); // Assign road to player
-            std::string road_path = "the Tiles " + std::to_string(this->id) + " put road in edge " + std::to_string(road_index) + "\n";
+            string road_path = "the Tiles " + to_string(this->id) + " put road in edge " + to_string(road_index) + "\n";
             player.add_road(road_path);
         }
         player.add_points(1);
@@ -985,7 +984,7 @@ bool Tiles::set_first_round_vertex(player &player, int &index)
     }
     else
     {
-        std::cerr << "Vertex is already occupied." << std::endl;
+        cerr << "Vertex is already occupied." << endl;
         return false;
     }
 }
@@ -997,19 +996,19 @@ bool Tiles::set_first_round_vertex(player &player, int &index)
     {
         if (index < 0 || index >= 7)
         {
-            std::cerr << "Index out of bounds." << std::endl;
+            cerr << "Index out of bounds." << endl;
             return false;
         }
         if (edges[index] == 0)
         {                              // Check if the edge is empty
             edges[index] = p1.getid(); // Assign road to player
-            std::string path = "the Tiles " + std::to_string(this->id) + " put road in edge " + std::to_string(index) + "\n";
+            string path = "the Tiles " + to_string(this->id) + " put road in edge " + to_string(index) + "\n";
             p1.add_road(path);
             return true;
         }
         else
         {
-            std::cerr << "Edge is already occupied." << std::endl;
+            cerr << "Edge is already occupied." << endl;
             return false;
         }
     }

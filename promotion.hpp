@@ -13,7 +13,7 @@ namespace ariel
         vector<resourceCard> price;
     public:
         promotion(string type, vector<resourceCard> price);
-        string get_type();
+        string get_type()override;
         void display() override;
         promotion();   
         ~promotion();

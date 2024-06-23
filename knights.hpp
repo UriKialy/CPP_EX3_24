@@ -15,7 +15,8 @@ namespace ariel
         knights(string type, vector<resourceCard> price);
         string get_type() override;
         static int get_knightsCount();
-        void display() override;
+         void display() override;
         static void clean_knightsCount();
+        vector<resourceCard> get_price() override;
     };
 }

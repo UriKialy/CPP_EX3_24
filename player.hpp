@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
 #include "victoryCard.hpp"
 #include "road_building.hpp"
 #include "monopolyCard.hpp"

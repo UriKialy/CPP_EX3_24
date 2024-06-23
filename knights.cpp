@@ -20,12 +20,16 @@ namespace ariel
         }
         cout << endl;
     }
-    string knights::get_type()
+    string knights::get_type() 
     {
         return type;
     }
     void knights::clean_knightsCount(){
         knightsCount = 0;
+    }
+    vector<resourceCard> knights::get_price()
+    {
+        return price;
     }
 }
    

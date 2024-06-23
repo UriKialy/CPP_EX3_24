@@ -14,5 +14,7 @@ namespace ariel
         }
         cout << endl;
     }
+   
+    
   
 }

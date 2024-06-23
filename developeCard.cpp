@@ -17,7 +17,7 @@ namespace ariel
     {
         cout << "Type: " << type << endl;
         cout << "Price: ";
-        for (auto &i : price)
+        for (auto &i : get_price())
         {
             cout << i.get_type() << " ";
         }

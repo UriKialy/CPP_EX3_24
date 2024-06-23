@@ -70,7 +70,8 @@ namespace ariel {
         cout << getName() << ", you don't have any development cards." << endl;
     }
     else
-    {
+    {   
+        cout << getName() << ", your development cards are: " << endl; 
         for (const auto &card : getDevelopment_cards())
         {
             card->display();
@@ -147,7 +148,9 @@ namespace ariel {
 
     int player::use(developeCard* card, player& take1, player& take2, board& board1) {
         string card_type = card->get_type();
+        cout<<"card type you are trying to use is :  "<<card_type<<endl;
         if (card_type == "victoryCard") {
+    
             processVictoryCard();
             return 1;
         } else if (card_type == "knights") {
@@ -195,11 +198,22 @@ void player::removeResources(const vector<string>& resources_to_remove) {
 
     developeCard* player::createDevelopmentCard(const string& card_type) {
         vector<resourceCard> price = { resourceCard("wool"), resourceCard("steel"), resourceCard("Wheat") };
-        if (card_type == "victoryCard")  cout<<"torl"<<endl; new victoryCard(card_type, price);
-        if (card_type == "abundanceCard") return new abundanceCard(card_type, price);
-        if (card_type == "monopolyCard") return new monopolyCard(card_type, price);
-        if (card_type == "road_building") return new road_building(card_type, price);
-        return new knights(card_type, price);
+        cout<<"card type you are trying to create is:   "<<card_type<<endl;
+        if (card_type == "victoryCard") {
+            return new victoryCard(card_type, price);
+        } else if (card_type == "abundanceCard") {
+            return new abundanceCard(card_type, price);
+        } else if (card_type == "monopolyCard") {
+            return new monopolyCard(card_type, price);
+        } else if (card_type == "road_building") {
+            return new road_building(card_type, price);
+        } else if  (card_type == "knights"){
+            return new knights(card_type, price);
+        }
+        else{
+            cout << "Invalid card type: " << card_type << endl;
+            return nullptr;
+        }
     }
 
     void player::processVictoryCard() {
@@ -212,8 +226,10 @@ void player::removeResources(const vector<string>& resources_to_remove) {
     void player::processKnightCard() {
         if (count_if(development_cards.begin(), development_cards.end(), [](developeCard* c) { return c->get_type() == "knights"; }) >= 3) {
             this->add_points(2);
+            cout<<"you have 3 knights"<<endl;
             removeCardOfType("knights");
         }
+        cout<<"not enough knights"<<endl;
     }
 
     void player::processMonopolyCard(player& take1, player& take2) {

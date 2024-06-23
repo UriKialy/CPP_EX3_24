@@ -5,17 +5,19 @@ namespace ariel
     int victoryCard::victoryCardCount = 0;
     victoryCard::victoryCard(string type, vector<resourceCard> &price) : developeCard(type, price)
     {
-        cout<<"uri"<<victoryCardCount<<endl;
         victoryCardCount++;
+        cout<<"the num of victorycard is  increased to:"<<victoryCardCount<<endl;
     }
 
-    string victoryCard::get_type()
-    {
-        return type;
-    }
+    
     int victoryCard::get_victoryCardCount()
     {
         return victoryCardCount;
+    }
+
+     void victoryCard::clean_card()
+    {
+        victoryCardCount=0;
     }
     void victoryCard::display()
     {
@@ -27,9 +29,6 @@ namespace ariel
         }
         cout << endl;
     }
-     void victoryCard::clean_card()
-    {
-        victoryCardCount=0;
-    }
+    
 
 }

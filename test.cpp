@@ -15,16 +15,16 @@ using namespace std;
 using namespace ariel;
 
 TEST_CASE("test create player") {
-    player p1("Orel");
-    CHECK(p1.getName() == "Orel");
-    player p2("Nir");
-    CHECK(p2.getName() == "Nir");
-    player p3("Amit");
-    CHECK(p3.getName() == "Amit");
+    player p1("dani");
+    CHECK(p1.getName() == "dani");
+    player p2("Elad");
+    CHECK(p2.getName() == "Elad");
+    player p3("dana");
+    CHECK(p3.getName() == "dana");
 }
 
 TEST_CASE("test score") {
-    player p1("Orel");
+    player p1("dani");
     CHECK(p1.getScore() == 0);
 }
 
@@ -52,9 +52,9 @@ TEST_CASE("test create board") {
         "       sea   sea   sea   sea   sea       \n"
         "*************************************\n";
 
-    //expected_output.erase(remove(expected_output.begin(), expected_output.end(), ' '), expected_output.end());
-    string actual_output = oss.str();
-    //actual_output.erase(remove(actual_output.begin(), actual_output.end(), ' '), actual_output.end());
+    expected_output.erase(remove(expected_output.begin(), expected_output.end(), ' '), expected_output.end());
+    std::string actual_output = oss.str();
+    actual_output.erase(remove(actual_output.begin(), actual_output.end(), ' '), actual_output.end());
 
     CHECK(actual_output == expected_output);
 }
@@ -74,7 +74,7 @@ TEST_CASE("test create resources card") {
 }
 
 TEST_CASE("test add resources to player") {
-    player p1("Orel");
+    player p1("dani");
     resourceCard r1("Wood");
     resourceCard r2("Brick");
     resourceCard r3("wool");
@@ -89,7 +89,7 @@ TEST_CASE("test add resources to player") {
 }
 
 TEST_CASE("test add development cards to player") {
-    player p1("Orel");
+    player p1("dani");
     developeCard* d1 = p1.createDevelopmentCard("victoryCard");
     developeCard* d2 = p1.createDevelopmentCard("abundanceCard");
     developeCard* d3 = p1.createDevelopmentCard("road_building");
@@ -106,13 +106,13 @@ TEST_CASE("test add development cards to player") {
 }
 
 TEST_CASE("test add score to player") {
-    player p1("Orel");
+    player p1("dani");
     p1.add_points(5);
     CHECK(p1.getScore() == 5);
 }
 
 TEST_CASE("test buy card") {
-    player p1("Orel");
+    player p1("dani");
     resourceCard r1("Wood");
     resourceCard r2("Brick");
     resourceCard r3("wool");
@@ -129,49 +129,10 @@ TEST_CASE("test buy card") {
 
 
 
-// TEST_CASE("test use development card") {
-//     player p1("Orel");
-//     player p2("Nir");
-//     board b;
-//     developeCard* d1 = p1.createDevelopmentCard("victoryCard");
-//     developeCard* d2 = p1.createDevelopmentCard("abundanceCard");
-//     developeCard* d3 = p1.createDevelopmentCard("road_building");
-//     developeCard* d4 = p1.createDevelopmentCard("monopolyCard");
-//     developeCard* d5 = p1.createDevelopmentCard("knights");
-//     p1.add_development_cards(d1);
-//     p1.add_development_cards(d2);
-//     p1.add_development_cards(d3);
-//     p1.add_development_cards(d4);
-//     p1.add_development_cards(d5);
-//     int counter = 0;
-//         if (p1.use(d1, p1, p2, b) == 1) {
-//             counter++;
-//             cout<<"victoryCard goot"<<endl;
-//         } else { }
-//         if (p1.use(d2, p1, p2, b) == 1) {
-//             counter++;
-//             cout<<"abundanceCard goot"<<endl;
-//         } else {  }
-//         if (p1.use(d3, p1, p2, b) == 1) {
-//             counter++;
-//             cout<<"road_building goot"<<endl;
-//         } else {  }
-//         if (p1.use(d4, p1, p2, b) == 1) {
-//             counter++;
-//             cout<<"monopolyCard goot"<<endl;
-//         } else {  }
-//         if (p1.use(d5, p1, p2, b) == 1) {
-//             counter++;
-//             cout<<"knights goot"<<endl;
-//         } else {  }
-//     CHECK(counter == 5);
-//         victoryCard::clean_card();
-//         knights::clean_knightsCount();
 
-// }
 
 TEST_CASE("test buy road") {
-    player p1("Orel");
+    player p1("dani");
     board b;
     int turn = 1;
     int id = 0;
@@ -181,7 +142,7 @@ TEST_CASE("test buy road") {
 }
 
 TEST_CASE("test buy settlement") {
-    player p1("Orel");
+    player p1("dani");
     p1.add_resourceCard(resourceCard("Wood"));
     p1.add_resourceCard(resourceCard("Brick"));
     p1.add_resourceCard(resourceCard("wool"));
@@ -203,7 +164,7 @@ TEST_CASE("test buy settlement") {
 }
 
 TEST_CASE("test buy city") {
-    player p1("Orel");
+    player p1("dani");
       p1.add_resourceCard(resourceCard("Wood"));
     p1.add_resourceCard(resourceCard("Brick"));
     p1.add_resourceCard(resourceCard("wool"));
@@ -266,9 +227,9 @@ TEST_CASE("test buy city") {
 }
 
 TEST_CASE("test roll number") {
-    player p1("Orel");
-    player p2("Nir");
-    player p3("Amit");
+    player p1("dani");
+    player p2("Elad");
+    player p3("dana");
     int resourcesp1 = p1.getResources().size();
     int resourcesp2 = p2.getResources().size();
     int resourcesp3 = p3.getResources().size();
@@ -279,8 +240,8 @@ TEST_CASE("test roll number") {
     CHECK(p3.getResources().size() >= resourcesp3);
 }
 TEST_CASE("test trade") {
-    player p1("Orel");
-    player p2("Nir");
+    player p1("dani");
+    player p2("Elad");
     resourceCard r1("Wood");
     resourceCard r2("Brick");
     resourceCard r3("wool");
@@ -302,14 +263,13 @@ TEST_CASE("test trade") {
 
     cin.rdbuf(old_cin_buf);
 
-    // Adjusted expected values based on the actual output
-    CHECK(p1.getResources().size() == 4); // Corrected expected size
-    CHECK(p2.getResources().size() == 2); // Corrected expected size
+    CHECK(p1.getResources().size() == 4); 
+    CHECK(p2.getResources().size() == 2); 
 }
 
 
 TEST_CASE("test display development cards") {
-    player p1("Orel");
+    player p1("dani");
     developeCard* d1 = p1.createDevelopmentCard("victoryCard");
     developeCard* d2 = p1.createDevelopmentCard("abundanceCard");
     developeCard* d3 = p1.createDevelopmentCard("road_building");
@@ -355,7 +315,7 @@ TEST_CASE("test display development cards") {
 
 
 TEST_CASE("test display resources") {
-    player p1("Orel");
+    player p1("dani");
     resourceCard r1("Wood");
     resourceCard r2("Brick");
     resourceCard r3("wool");
@@ -375,7 +335,7 @@ TEST_CASE("test display resources") {
 
     // Adjusted expected output based on actual function behavior
     string expected_output =
-        "Orel your resources are:\n"
+        "dani your resources are:\n"
         "Wood\n"
         "Brick\n"
         "wool\n"
@@ -385,7 +345,7 @@ TEST_CASE("test display resources") {
     CHECK(oss.str() == expected_output);
 }
 TEST_CASE("test display roads") {
-    player p1("Orel");
+    player p1("dani");
     p1.add_road("road1");
     p1.add_road("road2");
     p1.add_road("road3");
@@ -398,7 +358,7 @@ TEST_CASE("test display roads") {
 
     // Adjusted expected output based on actual function behavior
     string expected_output =
-        "Orel your Roads are: \n"  // Note the space before the newline
+        "dani your Roads are: \n"  // Note the space before the newline
         "road1\n"
         "road2\n"
         "road3\n";
@@ -418,7 +378,7 @@ TEST_CASE("test display roads") {
 
 
 TEST_CASE("test display settlements") {
-    player p1("Orel");
+    player p1("dani");
     p1.add_settlement("settlement1");
     p1.add_settlement("settlement2");
     p1.add_settlement("settlement3");
@@ -441,7 +401,7 @@ TEST_CASE("test display settlements") {
 }
 
 TEST_CASE("test display cities") {
-    player p1("Orel");
+    player p1("dani");
     p1.add_city("city1");
     p1.add_city("city2");
     p1.add_city("city3");
@@ -465,14 +425,14 @@ TEST_CASE("test display cities") {
 
 
 TEST_CASE("test end turn") {
-    player p1("Orel");
+    player p1("dani");
     p1.add_points(5);
     p1.end_turn();
     CHECK(p1.getScore() == 5);
 }
 
 TEST_CASE("test create development card") {
-    player p1("Orel");
+    player p1("dani");
     developeCard* d1 = p1.createDevelopmentCard("victoryCard");
     developeCard* d2 = p1.createDevelopmentCard("abundanceCard");
     developeCard* d3 = p1.createDevelopmentCard("road_building");
@@ -489,34 +449,33 @@ TEST_CASE("test create development card") {
 }
 
 TEST_CASE("check victory card") {
-    player p1("Orel");
+    player p1("dani");
     p1.add_resourceCard(resourceCard("Wood"));
     p1.add_resourceCard(resourceCard("Brick"));
     p1.add_resourceCard(resourceCard("wool"));
     p1.add_resourceCard(resourceCard("Wheat"));
     p1.add_resourceCard(resourceCard("steel"));
-    player p2("Nir");
-    player p3("Amit");
+    player p2("Elad");
+    player p3("dana");
     board b;
+    cout<<"trying to create card in test victory card"<<endl;
     developeCard* d1 = p1.createDevelopmentCard("victoryCard");
     p1.add_development_cards(d1);
+    p1.display_development_cards();
     p1.use(d1, p1, p2, b);
     CHECK(p1.getScore() == 1);
     victoryCard::clean_card();
-        victoryCard::clean_card();
-
-
 }
 
 TEST_CASE("check abundanceCard") {
-    player p1("Orel");
+    player p1("dani");
     p1.add_resourceCard(resourceCard("Wood"));
     p1.add_resourceCard(resourceCard("Brick"));
     p1.add_resourceCard(resourceCard("wool"));
     p1.add_resourceCard(resourceCard("Wheat"));
     p1.add_resourceCard(resourceCard("steel"));
-    player p2("Nir");
-    player p3("Amit");
+    player p2("Elad");
+    player p3("dana");
     board b;
     developeCard* d1 = p1.createDevelopmentCard("abundanceCard");
     p1.add_development_cards(d1);
@@ -543,18 +502,18 @@ TEST_CASE("check abundanceCard") {
 }
 
 TEST_CASE("test process Knight card") {
-    player p1("Orel");
+    player p1("dani");
      p1.add_resourceCard(resourceCard("Wood"));
     p1.add_resourceCard(resourceCard("Brick"));
     p1.add_resourceCard(resourceCard("wool"));
     p1.add_resourceCard(resourceCard("Wheat"));
     p1.add_resourceCard(resourceCard("steel"));
-    player p2("Nir");
-    player p3("Amit");
+    player p2("Elad");
+    player p3("dana");
     board b;
-    developeCard* k1 = p1.createDevelopmentCard("Knight");
-    developeCard* k2 = p1.createDevelopmentCard("Knight");
-    developeCard* k3 = p1.createDevelopmentCard("Knight");
+    developeCard* k1 = p1.createDevelopmentCard("knights");
+    developeCard* k2 = p1.createDevelopmentCard("knights");
+    developeCard* k3 = p1.createDevelopmentCard("knights");
 
     p1.add_development_cards(k1);
     p1.add_development_cards(k2);
