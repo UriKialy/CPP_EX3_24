@@ -14,10 +14,11 @@ namespace ariel
     public:
         promotion(string type, vector<resourceCard> price);
         string get_type()override;
-        void display() override;
+        vector<resourceCard> get_price()override;
+         void display() ;
         promotion();   
         ~promotion();
-             
+           
     };
 }
 // this the promotion class which is a base card for monopoly, year_of_abundance, road_building

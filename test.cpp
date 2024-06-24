@@ -292,6 +292,7 @@ TEST_CASE("test display development cards") {
     cout.rdbuf(old_cout_buf);
 
     string expected_output =
+        "dani, your development cards are: \n"
         "Type: victoryCard\nPrice: wool steel Wheat \n"
         "Type: abundanceCard\nPrice: wool steel Wheat \n"
         "Type: road_building\nPrice: wool steel Wheat \n"

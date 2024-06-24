@@ -9,7 +9,7 @@ namespace ariel
         vector<resourceCard> price;
     public:
         road_building(string type, vector<resourceCard> price); 
-        void display() override;
+        void display() ;
         
     };
 }

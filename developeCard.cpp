@@ -17,10 +17,12 @@ namespace ariel
     {
         cout << "Type: " << type << endl;
         cout << "Price: ";
-        for (auto &i : get_price())
+        cout<<"your price size is:  "<< get_price().size()<<endl;
+        for (resourceCard &i : get_price())
         {
             cout << i.get_type() << " ";
         }
         cout << endl;
     }
+
 }

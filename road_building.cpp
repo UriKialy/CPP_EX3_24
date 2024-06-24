@@ -7,11 +7,8 @@ namespace ariel
     void road_building::display()
     {
              cout << "Type: " << get_type() << endl;
-        cout << "Price: ";
-        for ( auto &resourceCard : get_price()) {
-            cout << resourceCard.get_type() << " ";
-        }
-        cout << endl;
+             cout << "Price: wool steel Wheat ";
+                cout << endl;
     }
   
    

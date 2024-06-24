@@ -75,6 +75,7 @@ namespace ariel {
         for (const auto &card : getDevelopment_cards())
         {
             card->display();
+
         }
     }
 }
@@ -148,7 +149,6 @@ namespace ariel {
 
     int player::use(developeCard* card, player& take1, player& take2, board& board1) {
         string card_type = card->get_type();
-        cout<<"card type you are trying to use is :  "<<card_type<<endl;
         if (card_type == "victoryCard") {
     
             processVictoryCard();
@@ -198,7 +198,6 @@ void player::removeResources(const vector<string>& resources_to_remove) {
 
     developeCard* player::createDevelopmentCard(const string& card_type) {
         vector<resourceCard> price = { resourceCard("wool"), resourceCard("steel"), resourceCard("Wheat") };
-        cout<<"card type you are trying to create is:   "<<card_type<<endl;
         if (card_type == "victoryCard") {
             return new victoryCard(card_type, price);
         } else if (card_type == "abundanceCard") {
@@ -226,10 +225,8 @@ void player::removeResources(const vector<string>& resources_to_remove) {
     void player::processKnightCard() {
         if (count_if(development_cards.begin(), development_cards.end(), [](developeCard* c) { return c->get_type() == "knights"; }) >= 3) {
             this->add_points(2);
-            cout<<"you have 3 knights"<<endl;
             removeCardOfType("knights");
         }
-        cout<<"not enough knights"<<endl;
     }
 
     void player::processMonopolyCard(player& take1, player& take2) {
@@ -405,7 +402,6 @@ int player::roll_number(board& b, player& p1, player &p2) {
         if(hasResources({"Brick", "Wood"})){
             if(b.getTile(id).setedges(edge,id)&&turn!=3)
             {
-                cout<<"orel"<<id<<" nissan "<<edge<<endl;
                 removeResources({"Brick", "Wood"});
                 cout<<"Road was bought at id:"<<tile<<" edge "<<edge<<endl;
                  string type="you have city at id:"+to_string(tile)+" vertex "+to_string(edge);

@@ -6,10 +6,7 @@ namespace ariel
     victoryCard::victoryCard(string type, vector<resourceCard> &price) : developeCard(type, price)
     {
         victoryCardCount++;
-        cout<<"the num of victorycard is  increased to:"<<victoryCardCount<<endl;
     }
-
-    
     int victoryCard::get_victoryCardCount()
     {
         return victoryCardCount;
